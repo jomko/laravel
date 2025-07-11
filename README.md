@@ -1,41 +1,35 @@
 # Local Development Guide
 
-This project provides a Laravel API with a Vue 3 single page application. The backend and frontend are developed separately and Blade templates, server-side rendering (SSR) and Vite SSR are **not** used.
+This project is a Laravel API backend with a Vue 3 single-page application frontend. It does **not** use Blade templates, server-side rendering (SSR), or Vite SSR. Backend and frontend are developed and deployed separately.
 
-## DDEV Setup
+## ✅ Quick Start with DDEV
 
-[DDEV](https://ddev.readthedocs.io/) provides Docker containers for local development. After installing DDEV run the environment from the project root:
+[DDEV](https://ddev.readthedocs.io/) provides Docker containers for local development.
 
 ```bash
-# copy environment files
+# Copy environment files
 cp .env.ddev .env
 cp frontend/.env.ddev frontend/.env
 
-# start containers and install dependencies
+# Start services and install dependencies
 ddev start
 ddev composer install
 ddev artisan key:generate
 ddev artisan migrate --seed
 ```
 
-After starting the containers, two services are available:
+---
 
-- API: [http://morkovka.ddev.site:8000](http://morkovka.ddev.site:8000)
-- Frontend: [http://morkovka-frontend.ddev.site:5173](http://morkovka-frontend.ddev.site:5173)
+## 🔗 Available Services
 
-Use `ddev npm install` to install dependencies and `ddev npm run dev` to run the frontend inside the container.
+- **API**: [https://morkovka.ddev.site:8443](https://morkovka.ddev.site:8443)
+- **Frontend (Vite)**: [http://morkovka-frontend.ddev.site:5173](http://morkovka-frontend.ddev.site:5173)
 
-## Backend Setup
+---
 
-```bash
-composer install
-```
+## 🐘 Database (PostgreSQL)
 
-Copy `.env.ddev` to `.env` if you are not using `ddev start`.
-
-### Database (PostgreSQL)
-
-DDEV provides PostgreSQL 15 with credentials defined in `.env.ddev`:
+PostgreSQL 15 is available via DDEV. Configuration is defined in `.env.ddev`:
 
 ```env
 DB_CONNECTION=pgsql
@@ -46,52 +40,50 @@ DB_USERNAME=db
 DB_PASSWORD=db
 ```
 
-After configuring the environment, run:
+After running `ddev artisan migrate --seed`, the database is ready. You can also reset it with:
 
 ```bash
-php artisan key:generate
-php artisan migrate --seed
+ddev artisan migrate:fresh --seed
 ```
 
-Start the development server on port **8000**:
+
+---
+
+## 📘 API Documentation (Swagger)
 
 ```bash
-php artisan serve --port=8000
+ddev artisan l5-swagger:generate
 ```
 
-### Queue Worker
+Docs will be available at:  
+[https://morkovka.ddev.site:8443/api/docs](https://morkovka.ddev.site:8443/api/docs)
 
-Run the queue worker in a separate terminal:
+---
 
-```bash
-php artisan queue:listen
-```
+## 🎨 Frontend Setup
 
-Queue and application logs are written to `storage/logs/laravel.log`.
-
-### API Documentation
-
-Generate and view the Swagger documentation:
-
-```bash
-php artisan l5-swagger:generate
-```
-
-The docs will be available at [http://morkovka.ddev.site:8000/api/docs](http://morkovka.ddev.site:8000/api/docs).
-
-## Frontend Setup
+Inside the `frontend/` directory:
 
 ```bash
 ddev npm install
-```
-
-Vite reads environment variables from `frontend/.env`. Start the development server on port **5173** in the frontend container:
-
-```bash
 ddev npm run dev
 ```
 
-## CORS and CSRF Notes
+Vite will serve the app at [http://morkovka-frontend.ddev.site:5173](http://morkovka-frontend.ddev.site:5173)
 
-When the frontend runs on a different port or domain, ensure that CORS and CSRF settings allow requests from that origin. Confirm that `SANCTUM_STATEFUL_DOMAINS` lists the frontend domain and that CORS settings in `config/cors.php` permit it. Otherwise you may encounter CORS or CSRF errors when authenticating or making API requests.
+---
 
+## 🔒 CORS and CSRF Notes
+
+To support cross-domain authentication:
+
+- Make sure `SANCTUM_STATEFUL_DOMAINS` includes the frontend domain (e.g., `morkovka-frontend.ddev.site:5173`)
+- CORS settings in `config/cors.php` must allow the origin
+
+---
+
+## 🧠 Tips
+
+- Use `ddev ssh` to access containers
+- If you edit `.env`, run `ddev restart`
+- Never commit sensitive files like `.env`, OAuth credentials, or access tokens
