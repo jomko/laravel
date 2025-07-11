@@ -4,57 +4,46 @@ This project provides a Laravel API with a Vue 3 single page application. The ba
 
 ## DDEV Setup
 
-[DDEV](https://ddev.readthedocs.io/) provides Docker containers for local development. After installing DDEV, configure and start the environment from the project root:
+[DDEV](https://ddev.readthedocs.io/) provides Docker containers for local development. After installing DDEV run the environment from the project root:
 
 ```bash
-# Initialize the project (creates the .ddev directory)
-ddev config --project-type=laravel --php-version=8.2 --docroot=public
+# copy environment files
+cp .env.ddev .env
+cp frontend/.env.ddev frontend/.env
 
-# Start the containers
+# start containers and install dependencies
 ddev start
-
-# Install dependencies and set up the application
 ddev composer install
 ddev artisan key:generate
 ddev artisan migrate --seed
 ```
 
-The application will be available at the domain shown by `ddev describe` (usually `https://laravel.ddev.site`). Use `ddev npm install` and `ddev npm run dev` to run the frontend inside the container.
+After starting the containers two services are available:
+
+- API: [http://morkovka.ddev.site:8000](http://morkovka.ddev.site:8000)
+- Frontend: [http://morkovka-frontend.ddev.site:5173](http://morkovka-frontend.ddev.site:5173)
+
+Use `ddev npm install` and `ddev npm run dev` to run the frontend inside the container.
 
 ## Backend Setup
 
 ```bash
 composer install
-cp .env.example .env
 ```
 
-Edit the `.env` file and configure the following settings:
-
-- `APP_URL=http://localhost:8000`
-- Update `SANCTUM_STATEFUL_DOMAINS` to include the domain running the frontend (for example `localhost:5173`).
-- If using cookies with Sanctum, set `supports_credentials` to `true` in `config/cors.php`.
+Copy `.env.ddev` to `.env` if you are not using `ddev start`.
 
 ### Database (PostgreSQL)
 
-Create the database and user:
-
-```bash
-psql -U postgres
-CREATE DATABASE laravel;
-CREATE USER laravel_user WITH PASSWORD 'secret';
-GRANT ALL PRIVILEGES ON DATABASE laravel TO laravel_user;
-\q
-```
-
-Example `.env` configuration:
+DDEV provides PostgreSQL 15 with credentials defined in `.env.ddev`:
 
 ```env
 DB_CONNECTION=pgsql
-DB_HOST=127.0.0.1
+DB_HOST=db
 DB_PORT=5432
-DB_DATABASE=laravel
-DB_USERNAME=laravel_user
-DB_PASSWORD=secret
+DB_DATABASE=morkovka
+DB_USERNAME=db
+DB_PASSWORD=db
 ```
 
 After configuring the environment run:
@@ -88,18 +77,18 @@ Generate and view the Swagger documentation:
 php artisan l5-swagger:generate
 ```
 
-The docs will be available at [http://localhost:8000/api/docs](http://localhost:8000/api/docs).
+The docs will be available at [http://morkovka.ddev.site:8000/api/docs](http://morkovka.ddev.site:8000/api/docs).
 
 ## Frontend Setup
 
 ```bash
-npm install
+ddev npm install
 ```
 
-Vite reads environment variables from `.env`. You can set values such as `VITE_APP_NAME` to make them available in the frontend code. Start the development server on port **5173**:
+Vite reads environment variables from `frontend/.env`. Start the development server on port **5173** in the frontend container:
 
 ```bash
-npm run dev
+ddev npm run dev
 ```
 
 ## CORS and CSRF Notes
