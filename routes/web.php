@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('/api/v1/example', ExampleController::class);
+
