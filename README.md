@@ -1,6 +1,6 @@
 # Local Development Guide
 
-This project provides a Laravel API with a Vue 3 single page application. The backend and frontend are developed separately and Blade templates, server side rendering (SSR) and Vite SSR are **not** used.
+This project provides a Laravel API with a Vue 3 single page application. The backend and frontend are developed separately and Blade templates, server-side rendering (SSR) and Vite SSR are **not** used.
 
 ## DDEV Setup
 
@@ -18,12 +18,12 @@ ddev artisan key:generate
 ddev artisan migrate --seed
 ```
 
-After starting the containers two services are available:
+After starting the containers, two services are available:
 
 - API: [http://morkovka.ddev.site:8000](http://morkovka.ddev.site:8000)
 - Frontend: [http://morkovka-frontend.ddev.site:5173](http://morkovka-frontend.ddev.site:5173)
 
-Use `ddev npm install` and `ddev npm run dev` to run the frontend inside the container.
+Use `ddev npm install` to install dependencies and `ddev npm run dev` to run the frontend inside the container.
 
 ## Backend Setup
 
@@ -46,7 +46,7 @@ DB_USERNAME=db
 DB_PASSWORD=db
 ```
 
-After configuring the environment run:
+After configuring the environment, run:
 
 ```bash
 php artisan key:generate
