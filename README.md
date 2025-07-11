@@ -12,17 +12,31 @@ cp .env.example .env
 Edit the `.env` file and configure the following settings:
 
 - `APP_URL=http://localhost:8000`
-- Database connection using MySQL or MariaDB:
-  ```env
-  DB_CONNECTION=mysql
-  DB_HOST=127.0.0.1
-  DB_PORT=3306
-  DB_DATABASE=laravel
-  DB_USERNAME=root
-  DB_PASSWORD=
-  ```
 - Update `SANCTUM_STATEFUL_DOMAINS` to include the domain running the frontend (for example `localhost:5173`).
 - If using cookies with Sanctum, set `supports_credentials` to `true` in `config/cors.php`.
+
+### Database (PostgreSQL)
+
+Create the database and user:
+
+```bash
+psql -U postgres
+CREATE DATABASE laravel;
+CREATE USER laravel_user WITH PASSWORD 'secret';
+GRANT ALL PRIVILEGES ON DATABASE laravel TO laravel_user;
+\q
+```
+
+Example `.env` configuration:
+
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=laravel
+DB_USERNAME=laravel_user
+DB_PASSWORD=secret
+```
 
 After configuring the environment run:
 
