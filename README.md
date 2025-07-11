@@ -35,6 +35,12 @@ composer test
 - Authentication via Laravel Sanctum
 - Vue 3 frontend built with Vite
 
+## Backend
+
+- **CORS**: The `HandleCors` middleware uses the settings in `config/cors.php`. By default, requests are allowed from the `APP_URL` environment variable (falling back to `http://localhost`).
+- **Exceptions**: `App\Exceptions\Handler` returns JSON when a request expects it, including the message and HTTP status code.
+- **Logging**: The default channel is controlled by `LOG_CHANNEL` (default `stack` which points to `single`). Logs are written to `storage/logs/laravel.log`. You can override the channel using `LOG_CHANNEL` or `LOG_STACK`.
+
 ## API documentation
 
 Swagger UI is available at `/api/docs` after running the Swagger generator. Endpoints can be documented using PHP attributes from `swagger-php`. Example:
