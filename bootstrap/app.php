@@ -10,12 +10,14 @@ return Application::configure(basePath: dirname(__DIR__))
         api: __DIR__.'/../routes/api.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
+        api: __DIR__.'/../routes/api/v1.php',
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->group('api', [
             \App\Http\Middleware\LogApiRequests::class,
         ]);
+        $middleware->append(\Fruitcake\Cors\HandleCors::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+
     })->create();
