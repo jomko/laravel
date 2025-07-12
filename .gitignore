@@ -67,3 +67,4 @@ Thumbs.db
 # OS-specific
 *.~lock.*          # LibreOffice lock files
 *.tmp
+.phpunit.result.cache
