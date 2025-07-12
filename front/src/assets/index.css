@@ -75,4 +75,16 @@
   body {
     @apply bg-background text-foreground;
   }
+  a {
+    @apply text-primary underline underline-offset-4 transition-colors hover:text-primary/80;
+  }
+  button {
+    @apply transition-colors;
+  }
+  table tbody tr {
+    @apply transition-colors;
+  }
+  table tbody tr:hover {
+    @apply bg-muted/50;
+  }
 }
