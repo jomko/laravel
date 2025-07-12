@@ -12,7 +12,7 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCap
 import { Toaster, toast } from '@/components/ui/sonner'
 import { useVueTable, getCoreRowModel, type ColumnDef } from '@tanstack/vue-table'
 import { z } from 'zod'
-import 'vue-sonner/lib/index.css'
+import 'vue-sonner/style.css'
 
 interface Person {
   id: number
@@ -62,7 +62,7 @@ function submit() {
 <template>
   <div class="dark p-8 space-y-8">
     <h1 class="text-3xl font-bold text-center">Морква 2.0 — Презентація інтерфейсу</h1>
-    <p class="text-center text-muted-foreground">Що ми тут можемо, крім пельменів?</p>
+    <p class="text-center text-muted-foreground">Що ми тут можемо, крім горішків?</p>
 
     <!-- Forms -->
     <section class="space-y-4">
