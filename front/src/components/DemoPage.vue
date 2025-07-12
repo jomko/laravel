@@ -51,6 +51,7 @@ const tableData = ref<Person[]>([
   { id: 1, name: 'Богдан', status: 'Активний' },
   { id: 2, name: 'Юра', status: 'П\'є пиво' },
   { id: 3, name: 'Антон', status: 'На морі' },
+  { id: 4, name: 'Вона', status: 'Працює' },
 ])
 
 const table = useVueTable({
