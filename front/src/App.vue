@@ -4,9 +4,9 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
 
-  <div class="flex justify-center items-center py-12">
+  <h2 class="flex justify-center items-center py-12">
     🥕 Morkva 2.0
-  </div>
+  </h2>
 
   <HelloWorld msg="Vite + Vue" />
 </template>
