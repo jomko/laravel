@@ -1,10 +1,69 @@
-*.log
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/storage/pail
+# Laravel
 /vendor
 /.env
-/frontend/.env
+/.env.*
+/storage/*.key
+/storage/*.log
+/storage/framework/*
+!/storage/.gitignore
+/bootstrap/cache/*
+/public/storage
+Homestead.json
+Homestead.yaml
+
+# Laravel IDE helpers
+.phpstorm.meta.php
+_ide_helper*.php
+
+# Composer
+composer.lock
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Frontend (Vite, Vue)
+frontend/node_modules/
+frontend/.vscode/
+frontend/dist/
+frontend/.env
+frontend/.env.*
+frontend/package-lock.json
+
+# System
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+
+# DDEV
+.ddev/.dbdata
+.ddev/sequelpro.spf
+.ddev/import-db
+.ddev/import-db.gz
+.ddev/import-db.sql
+.ddev/export-db*
+.ddev/ssh-agent-socket
+.ddev/logs/*
+!.ddev/.gitignore
+
+# Logs
+*.log
+*.pid
+*.seed
+*.sqlite
+
+# IDEs
+.idea/
+.vscode/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# OS-specific
+*.~lock.*          # LibreOffice lock files
+*.tmp
