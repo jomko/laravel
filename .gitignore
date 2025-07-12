@@ -26,12 +26,12 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Frontend (Vite, Vue)
-frontend/node_modules/
-frontend/.vscode/
-frontend/dist/
-frontend/.env
-frontend/.env.*
-frontend/package-lock.json
+front/node_modules/
+front/.vscode/
+front/dist/
+front/.env
+front/.env.*
+front/package-lock.json
 
 # System
 .DS_Store
