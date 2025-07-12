@@ -48,9 +48,9 @@ const columns: ColumnDef<Person>[] = [
 ]
 
 const tableData = ref<Person[]>([
-  { id: 1, name: 'Борис', status: 'Активний' },
-  { id: 2, name: 'Ганна', status: 'Спить' },
-  { id: 3, name: 'Микита', status: 'На морі' },
+  { id: 1, name: 'Богдан', status: 'Активний' },
+  { id: 2, name: 'Юра', status: 'П\'є пиво' },
+  { id: 3, name: 'Антон', status: 'На морі' },
 ])
 
 const table = useVueTable({
@@ -77,13 +77,6 @@ function submit() {
   errors.value = {}
   toast('Форма відправлена! Але це ще нічого не означає.')
 }
-
-function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-  mobileNavOpen.value = false
-}
-
-const mobileNavOpen = ref(false)
 
 const mode = useColorMode({ attribute: 'class', selector: 'html', initialValue: 'dark' })
 function toggleMode() {
@@ -181,7 +174,7 @@ onMounted(() => {
           <section id="forms" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
             <h2 class="text-xl font-semibold text-primary">Форми: легше не буває</h2>
             <Input placeholder="Просто input" />
-            <Textarea placeholder="А тут можна розписатися" />
+            <Textarea placeholder="А тут можна писати" />
             <Select v-model="form.status">
               <SelectItem value="one">Опція 1</SelectItem>
               <SelectItem value="two">Опція 2</SelectItem>

@@ -87,4 +87,29 @@
   table tbody tr:hover {
     @apply bg-muted/50;
   }
+
+    /* Hover effects for buttons */
+  button:hover {
+    @apply bg-primary/20;
+  }
+  button:focus {
+    @apply outline-none ring-2 ring-primary/50;
+  }
+
+  /* Hover effects for links */
+  a:hover {
+    @apply text-primary/70;
+  }
+
+  /* Hover effects for table rows */
+  table tbody tr {
+    @apply transition-colors;
+  }
+  table tbody tr:hover {
+    @apply bg-muted/50;
+    @apply cursor-pointer;
+  }
+  table tbody tr:focus {
+    @apply outline-none ring-2 ring-primary/50;
+  }
 }
