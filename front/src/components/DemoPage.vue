@@ -73,60 +73,45 @@ function toggleMode() {
 </script>
 
 <template>
-
-  <div class="dark min-h-screen p-8">
-    <div class="max-w-3xl mx-auto relative">
+  <div :class="mode">
+    <div class="min-h-screen bg-background p-8">
       <!-- theme toggle -->
       <Button
-        class="absolute right-0 -top-2"
+        class="absolute right-0 top-4 md:top-8"
         size="icon"
         variant="outline"
         @click="toggleMode"
       >
         <Icon
           icon="radix-icons:moon"
-          class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+          class="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
         />
         <Icon
           icon="radix-icons:sun"
-          class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+          class="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
         />
         <span class="sr-only">Toggle theme</span>
       </Button>
 
-
-      <!-- mobile nav -->
-      <div class="md:hidden mb-4">
-        <Button variant="outline" @click="mobileNavOpen = !mobileNavOpen">Меню</Button>
-        <div v-if="mobileNavOpen" class="mt-2 space-y-1">
-          <Button variant="ghost" class="w-full justify-start" @click="scrollToSection('forms')">Forms</Button>
-          <Button variant="ghost" class="w-full justify-start" @click="scrollToSection('buttons')">Buttons</Button>
-          <Button variant="ghost" class="w-full justify-start" @click="scrollToSection('alerts')">Alerts</Button>
-          <Button variant="ghost" class="w-full justify-start" @click="scrollToSection('modal')">Modal</Button>
-          <Button variant="ghost" class="w-full justify-start" @click="scrollToSection('table')">Table</Button>
-          <Button variant="ghost" class="w-full justify-start" @click="scrollToSection('validation')">Validation</Button>
-        </div>
+      <!-- desktop nav -->
+      <div class="md:bottom-4 md:top-20 md:block">
+        <nav class="space-y-2">
+          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('forms')">Форми</Button>
+          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('buttons')">Кнопки</Button>
+          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('alerts')">Попередження</Button>
+          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('modal')">Модалка</Button>
+          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('table')">Таблиця</Button>
+          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('validation')">Валідація</Button>
+        </nav>
       </div>
 
-      <!-- desktop nav -->
-      <aside class="hidden md:fixed md:left-4 md:top-20 md:block">
-        <nav class="space-y-2">
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('forms')">Forms</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('buttons')">Buttons</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('alerts')">Alerts</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('modal')">Modal</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('table')">Table</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('validation')">Validation</Button>
-        </nav>
-      </aside>
-
-      <main class="space-y-8 md:ml-48">
-        <h1 class="text-3xl font-bold text-center">Морква 2.0 — Презентація інтерфейсу</h1>
-        <p class="text-center text-muted-foreground">Що ми тут можемо, крім пельменів?</p>
+      <main class="space-y-8 md:mt-24">
+        <h1 class="text-3xl font-bold text-center text-primary">Морква 2.0 — Презентація інтерфейсу</h1>
+        <p class="text-center text-muted-foreground">Що ми тут можемо, крім горішків?</p>
 
         <!-- Forms -->
-        <section id="forms" class="rounded-xl bg-muted p-6 shadow-sm space-y-4">
-          <h2 class="text-xl font-semibold">Форми: легше не буває</h2>
+        <section id="forms" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+          <h2 class="text-xl font-semibold text-primary">Форми: легше не буває</h2>
           <Input placeholder="Просто input" />
           <Textarea placeholder="А тут можна розписатися" />
           <Select v-model="form.status">
@@ -140,8 +125,8 @@ function toggleMode() {
         </section>
 
         <!-- Buttons -->
-        <section id="buttons" class="rounded-xl bg-muted p-6 shadow-sm space-y-4">
-          <h2 class="text-xl font-semibold">Кнопки для натискання (або не треба?)</h2>
+        <section id="buttons" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+          <h2 class="text-xl font-semibold text-primary">Кнопки для натискання (або не треба?)</h2>
           <div class="flex gap-2">
             <Button>Default</Button>
             <Button variant="ghost">Ghost</Button>
@@ -150,8 +135,8 @@ function toggleMode() {
         </section>
 
         <!-- Alerts & Toast -->
-        <section id="alerts" class="rounded-xl bg-muted p-6 shadow-sm space-y-4">
-          <h2 class="text-xl font-semibold">Тости, модалки й інші принади</h2>
+        <section id="alerts" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+          <h2 class="text-xl font-semibold text-primary">Тости, модалки й інші принади</h2>
           <Alert>
             <Icon icon="radix-icons:info-circled" class="h-4 w-4" />
             <div>
@@ -163,8 +148,8 @@ function toggleMode() {
         </section>
 
         <!-- Modal -->
-        <section id="modal" class="rounded-xl bg-muted p-6 shadow-sm space-y-4">
-          <h2 class="text-xl font-semibold">Модалка без зайвого пафосу</h2>
+        <section id="modal" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+          <h2 class="text-xl font-semibold text-primary">Модалка без зайвого пафосу</h2>
           <Dialog>
             <template #trigger>
               <Button>Відкрити модалку</Button>
@@ -175,8 +160,8 @@ function toggleMode() {
         </section>
 
         <!-- Table -->
-        <section id="table" class="rounded-xl bg-muted p-6 shadow-sm space-y-4">
-          <h2 class="text-xl font-semibold">Табличка скромних розмірів</h2>
+        <section id="table" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+          <h2 class="text-xl font-semibold text-primary">Табличка скромних розмірів</h2>
           <Table>
             <TableHeader>
               <TableRow v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
@@ -197,8 +182,8 @@ function toggleMode() {
         </section>
 
         <!-- Validation -->
-        <section id="validation" class="rounded-xl bg-muted p-6 shadow-sm space-y-4">
-          <h2 class="text-xl font-semibold">Форма з валідацією (не плач, вона лагідна)</h2>
+        <section id="validation" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+          <h2 class="text-xl font-semibold text-primary">Форма з валідацією (не плач, вона лагідна)</h2>
           <Input v-model="form.name" placeholder="Ім'я" />
           <p v-if="errors.name" class="text-sm text-red-500">{{ errors.name[0] }}</p>
           <Input v-model="form.email" placeholder="Пошта" />
@@ -211,4 +196,3 @@ function toggleMode() {
     </div>
   </div>
 </template>
-
