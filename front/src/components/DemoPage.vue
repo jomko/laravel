@@ -167,29 +167,6 @@ onMounted(() => {
         <span class="sr-only">Toggle theme</span>
       </Button>
 
-      <!-- desktop nav -->
-      <div class="md:bottom-4 md:top-20 md:block">
-        <nav class="space-y-2">
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('forms')">Форми</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('buttons')">Кнопки</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('alerts')">Попередження</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('modal')">Модалка</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('table')">Таблиця</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('validation')">Валідація</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('charts')">Графіки</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('pagination-table')">Пагінація</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('slider')">Слайдер</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('tabs')">Таби</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('search')">Пошук</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('accordion')">Акордеон</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('switch')">Перемикач</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('loader')">Лоадер</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('progress')">Прогрес</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('date')">Дата</Button>
-          <Button variant="ghost" class="w-40 justify-start" @click="scrollToSection('breadcrumbs')">Хлібні крихти</Button>
-        </nav>
-      </div>
-
       <!-- Main content (grid layout) -->
       <main class="space-y-8 md:mt-24">
         <!-- Заголовок -->
