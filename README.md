@@ -9,7 +9,7 @@ This project is a Laravel API backend with a Vue 3 single-page application front
 ```bash
 # Copy environment files
 cp .env.ddev .env
-cp frontend/.env.ddev frontend/.env
+cp front/.env.ddev front/.env
 
 # Start services and install dependencies
 ddev start
@@ -62,7 +62,7 @@ Docs will be available at:
 
 ## 🎨 Frontend Setup
 
-Inside the `frontend/` directory:
+Inside the `front/` directory:
 
 ```bash
 ddev npm install
