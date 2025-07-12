@@ -105,91 +105,98 @@ function toggleMode() {
         </nav>
       </div>
 
+      <!-- Main content (grid layout) -->
       <main class="space-y-8 md:mt-24">
-        <h1 class="text-3xl font-bold text-center text-primary">Морква 2.0 — Презентація інтерфейсу</h1>
-        <p class="text-center text-muted-foreground">Що ми тут можемо, крім горішків?</p>
+        <!-- Заголовок -->
+        <div class="text-center">
+          <h1 class="text-3xl font-bold text-primary">Морква 2.0 — Презентація інтерфейсу</h1>
+          <p class="text-center text-muted-foreground">Що ми тут можемо, крім горішків?</p>
+        </div>
 
-        <!-- Forms -->
-        <section id="forms" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
-          <h2 class="text-xl font-semibold text-primary">Форми: легше не буває</h2>
-          <Input placeholder="Просто input" />
-          <Textarea placeholder="А тут можна розписатися" />
-          <Select v-model="form.status">
-            <SelectItem value="one">Опція 1</SelectItem>
-            <SelectItem value="two">Опція 2</SelectItem>
-          </Select>
-          <div class="flex items-center space-x-2">
-            <Checkbox v-model="form.agree" />
-            <span>Погоджуюсь з тим, що це жарт</span>
-          </div>
-        </section>
-
-        <!-- Buttons -->
-        <section id="buttons" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
-          <h2 class="text-xl font-semibold text-primary">Кнопки для натискання (або не треба?)</h2>
-          <div class="flex gap-2">
-            <Button>Default</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="destructive">Destructive</Button>
-          </div>
-        </section>
-
-        <!-- Alerts & Toast -->
-        <section id="alerts" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
-          <h2 class="text-xl font-semibold text-primary">Тости, модалки й інші принади</h2>
-          <Alert>
-            <Icon icon="radix-icons:info-circled" class="h-4 w-4" />
-            <div>
-              <AlertTitle>Ну і що тепер?</AlertTitle>
-              <AlertDescription>Невеличкий приклад алерту.</AlertDescription>
+        <!-- Grid for the content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <!-- Forms -->
+          <section id="forms" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+            <h2 class="text-xl font-semibold text-primary">Форми: легше не буває</h2>
+            <Input placeholder="Просто input" />
+            <Textarea placeholder="А тут можна розписатися" />
+            <Select v-model="form.status">
+              <SelectItem value="one">Опція 1</SelectItem>
+              <SelectItem value="two">Опція 2</SelectItem>
+            </Select>
+            <div class="flex items-center space-x-2">
+              <Checkbox v-model="form.agree" />
+              <span>Погоджуюсь з тим, що це жарт</span>
             </div>
-          </Alert>
-          <Button @click="toast('Ви щойно натиснули. І що?')">Викликати toast</Button>
-        </section>
+          </section>
 
-        <!-- Modal -->
-        <section id="modal" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
-          <h2 class="text-xl font-semibold text-primary">Модалка без зайвого пафосу</h2>
-          <Dialog>
-            <template #trigger>
-              <Button>Відкрити модалку</Button>
-            </template>
-            <template #title>Привіт!</template>
-            <template #description>Ти відкрив модалку. Молодець!</template>
-          </Dialog>
-        </section>
+          <!-- Buttons -->
+          <section id="buttons" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+            <h2 class="text-xl font-semibold text-primary">Кнопки для натискання (або не треба?)</h2>
+            <div class="flex gap-2">
+              <Button>Default</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="destructive">Destructive</Button>
+            </div>
+          </section>
 
-        <!-- Table -->
-        <section id="table" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
-          <h2 class="text-xl font-semibold text-primary">Табличка скромних розмірів</h2>
-          <Table>
-            <TableHeader>
-              <TableRow v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
-                <TableHead v-for="header in headerGroup.headers" :key="header.id">
-                  <span v-if="!header.isPlaceholder">{{ header.column.columnDef.header }}</span>
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow v-for="row in table.getRowModel().rows" :key="row.id">
-                <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id">
-                  {{ cell.getValue() }}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-            <TableCaption>Суто фейкові дані</TableCaption>
-          </Table>
-        </section>
+          <!-- Alerts & Toast -->
+          <section id="alerts" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+            <h2 class="text-xl font-semibold text-primary">Тости, модалки й інші принади</h2>
+            <Alert>
+              <Icon icon="radix-icons:info-circled" class="h-4 w-4" />
+              <div>
+                <AlertTitle>Ну і що тепер?</AlertTitle>
+                <AlertDescription>Невеличкий приклад алерту.</AlertDescription>
+              </div>
+            </Alert>
+            <Button @click="toast('Ви щойно натиснули. І що?')">Викликати toast</Button>
+          </section>
 
-        <!-- Validation -->
-        <section id="validation" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
-          <h2 class="text-xl font-semibold text-primary">Форма з валідацією (не плач, вона лагідна)</h2>
-          <Input v-model="form.name" placeholder="Ім'я" />
-          <p v-if="errors.name" class="text-sm text-red-500">{{ errors.name[0] }}</p>
-          <Input v-model="form.email" placeholder="Пошта" />
-          <p v-if="errors.email" class="text-sm text-red-500">{{ errors.email[0] }}</p>
-          <Button @click="submit">Надіслати</Button>
-        </section>
+          <!-- Modal -->
+          <section id="modal" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+            <h2 class="text-xl font-semibold text-primary">Модалка без зайвого пафосу</h2>
+            <Dialog>
+              <template #trigger>
+                <Button>Відкрити модалку</Button>
+              </template>
+              <template #title>Привіт!</template>
+              <template #description>Ти відкрив модалку. Молодець!</template>
+            </Dialog>
+          </section>
+
+          <!-- Table -->
+          <section id="table" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+            <h2 class="text-xl font-semibold text-primary">Табличка скромних розмірів</h2>
+            <Table>
+              <TableHeader>
+                <TableRow v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
+                  <TableHead v-for="header in headerGroup.headers" :key="header.id">
+                    <span v-if="!header.isPlaceholder">{{ header.column.columnDef.header }}</span>
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow v-for="row in table.getRowModel().rows" :key="row.id">
+                  <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id">
+                    {{ cell.getValue() }}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+              <TableCaption>Суто фейкові дані</TableCaption>
+            </Table>
+          </section>
+
+          <!-- Validation -->
+          <section id="validation" class="rounded-xl bg-muted p-6 shadow-md space-y-4">
+            <h2 class="text-xl font-semibold text-primary">Форма з валідацією (не плач, вона лагідна)</h2>
+            <Input v-model="form.name" placeholder="Ім'я" />
+            <p v-if="errors.name" class="text-sm text-red-500">{{ errors.name[0] }}</p>
+            <Input v-model="form.email" placeholder="Пошта" />
+            <p v-if="errors.email" class="text-sm text-red-500">{{ errors.email[0] }}</p>
+            <Button @click="submit">Надіслати</Button>
+          </section>
+        </div>
       </main>
 
       <Toaster position="top-right" />
