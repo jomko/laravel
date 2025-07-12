@@ -18,6 +18,8 @@ ddev artisan key:generate
 ddev artisan migrate --seed
 ```
 
+- If you modify `.env` later, run `ddev restart` to apply the changes.
+
 ---
 
 ## 🔗 Available Services
