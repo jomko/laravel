@@ -12,6 +12,8 @@
     "@radix-icons/vue": "^1.0.0",
     "@tanstack/table-core": "^8.21.3",
     "@tanstack/vue-table": "^8.21.3",
+    "@tanstack/vue-form": "^1.14.0",
+    "vue-i18n": "^11.1.9",
     "@vueuse/core": "^11.0.3",
     "chart.js": "^4.5.0",
     "class-variance-authority": "^0.7.0",
