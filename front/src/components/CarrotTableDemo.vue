@@ -81,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { Input } from '@/components/ui/input'
 import { Select, SelectItem } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
@@ -111,7 +111,6 @@ interface Item {
 function generateData(count = 10000): Item[] {
   const names = ['Морква', 'Яблуко', 'Картопля', 'Банан', 'Гречка', 'Молоко', 'Сир', 'Апельсин', 'Огірок', 'Рис', 'Сметана', 'Груша', 'Перець', 'Манго', 'Пшоно']
   const categories = ['Овочі', 'Фрукти', 'Крупи', 'Молочне']
-  const statuses = ['active', 'low', 'none', 'archived'] as const
 
   return Array.from({ length: count }, (_, i) => {
     const name = names[i % names.length]
@@ -148,6 +147,19 @@ const filteredData = computed(() => {
 
 const sorting = ref<SortingState>([])
 const pagination = ref({ pageIndex: 0, pageSize: '20' })
+
+watch(search, () => {
+  pagination.value.pageIndex = 0
+})
+watch(categoryFilter, () => {
+  pagination.value.pageIndex = 0
+})
+watch(createdFrom, () => {
+  pagination.value.pageIndex = 0
+})
+watch(createdTo, () => {
+  pagination.value.pageIndex = 0
+})
 const columns: ColumnDef<Item>[] = [
   { accessorKey: 'id', header: 'ID' },
   { accessorKey: 'name', header: 'Назва' },
