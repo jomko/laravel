@@ -393,15 +393,13 @@ onMounted(() => {
           </section>
         </div>
 
-        <div class="text-center">
-          <br>
-          <br>
-          <br>
-          <br>
+
+
+        <section>
+        <div class="text-center under_hood">
           <h1 class="text-3xl font-bold text-primary">Під капотом</h1>
         </div>
 
-        <section>
           <section class="prose max-w-3xl mx-auto py-12">
 <p class="mb-6">
   Цей проєкт побудований як сучасна, headless‑SPA‑адмінка для управління товарами, цінами, складами й каналами продажу.
