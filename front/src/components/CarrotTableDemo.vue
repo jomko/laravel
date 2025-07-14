@@ -9,7 +9,7 @@
       <div>
         <label class="block text-sm font-medium mb-1">Категорія</label>
         <Select :modelValue="categoryFilter" @update:modelValue="categoryFilter = $event">
-          <SelectItem value="">Всі</SelectItem>
+          <SelectItem value="all">Всі</SelectItem>
           <SelectItem value="Овочі">Овочі</SelectItem>
           <SelectItem value="Фрукти">Фрукти</SelectItem>
           <SelectItem value="Крупи">Крупи</SelectItem>
@@ -95,7 +95,7 @@ import {
   type ColumnDef,
   type SortingState,
 } from '@tanstack/vue-table'
-import { useDebounceFn } from '@vueuse/core'
+
 
 interface Item {
   id: number
@@ -129,14 +129,14 @@ function generateData(count = 10000): Item[] {
 
 const rawData = ref<Item[]>(generateData())
 const search = ref('')
-const categoryFilter = ref('')
+const categoryFilter = ref('all')
 const createdFrom = ref('')
 const createdTo = ref('')
 
 const filteredData = computed(() => {
   return rawData.value.filter((item) => {
     const matchesSearch = item.name.toLowerCase().includes(search.value.toLowerCase())
-    const matchesCategory = categoryFilter.value ? item.category === categoryFilter.value : true
+    const matchesCategory = categoryFilter.value === 'all' ? true : item.category === categoryFilter.value
     const created = new Date(item.created_at)
     const from = createdFrom.value ? new Date(createdFrom.value) : null
     const to = createdTo.value ? new Date(createdTo.value) : null
