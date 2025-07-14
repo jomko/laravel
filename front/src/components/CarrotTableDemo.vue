@@ -81,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { Input } from '@/components/ui/input'
 import { Select, SelectItem } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
@@ -147,6 +147,19 @@ const filteredData = computed(() => {
 
 const sorting = ref<SortingState>([])
 const pagination = ref({ pageIndex: 0, pageSize: '20' })
+
+watch(search, () => {
+  pagination.value.pageIndex = 0
+})
+watch(categoryFilter, () => {
+  pagination.value.pageIndex = 0
+})
+watch(createdFrom, () => {
+  pagination.value.pageIndex = 0
+})
+watch(createdTo, () => {
+  pagination.value.pageIndex = 0
+})
 const columns: ColumnDef<Item>[] = [
   { accessorKey: 'id', header: 'ID' },
   { accessorKey: 'name', header: 'Назва' },
