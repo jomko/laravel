@@ -102,12 +102,13 @@ function copyCell(value: unknown) {
   <div class="space-y-2">
     <div class="flex gap-2">
       <Input v-model="search" placeholder="Search..." class="max-w-sm" />
-      <Select v-model="statusFilter" class="max-w-[150px]">
-        <SelectItem value="">All</SelectItem>
-        <SelectItem value="active">active</SelectItem>
-        <SelectItem value="archived">archived</SelectItem>
-        <SelectItem value="draft">draft</SelectItem>
-      </Select>
+<Select v-model="statusFilter">
+  <SelectItem :value="'active'">active</SelectItem>
+  <SelectItem :value="'archived'">archived</SelectItem>
+  <SelectItem :value="'draft'">draft</SelectItem>
+</Select>
+
+
     </div>
     <div class="max-h-[600px] overflow-y-scroll">
       <Table>

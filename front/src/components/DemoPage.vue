@@ -398,7 +398,14 @@ onMounted(() => {
           </section>
         </div>
 
-        <CarrotTableDemo class="mt-6" />
+        <section class="prose mx-auto py-12">
+          <div class="text-center">
+            <h1 class="text-3xl font-bold text-primary">Ух-ти, табличка!</h1>
+            <p class="text-center text-muted-foreground">фільтрує, шукає і має тисячу рядків</p>
+          </div>  
+          <CarrotTableDemo class="mt-6" />
+        </section>
+        
 
         <section>
         <div class="text-center under_hood">
