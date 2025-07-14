@@ -8,7 +8,7 @@
       </div>
       <div>
         <label class="block text-sm font-medium mb-1">Категорія</label>
-        <Select v-model="categoryFilter">
+        <Select :modelValue="categoryFilter" @update:modelValue="categoryFilter = $event">
           <SelectItem value="">Всі</SelectItem>
           <SelectItem value="Овочі">Овочі</SelectItem>
           <SelectItem value="Фрукти">Фрукти</SelectItem>
@@ -45,8 +45,8 @@
           <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="hover:bg-gray-50">
             <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" class="px-2 py-1">
               <template v-if="cell.column.id === 'status'">
-                <span :class="getStatusColor(cell.getValue())" class="px-2 py-0.5 rounded text-xs font-medium">
-                  {{ getStatusLabel(cell.getValue()) }}
+                <span :class="getStatusColor(cell.getValue() as string)" class="px-2 py-0.5 rounded text-xs font-medium">
+                  {{ getStatusLabel(cell.getValue() as string) }}
                 </span>
               </template>
               <template v-else-if="cell.column.id === 'actions'">
@@ -65,7 +65,7 @@
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2">
         <span class="text-sm">Показати:</span>
-        <Select v-model="pagination.pageSize">
+        <Select :modelValue="String(pagination.pageSize)" @update:modelValue="pagination.pageSize = Number($event)">
           <SelectItem value="10">10</SelectItem>
           <SelectItem value="20">20</SelectItem>
           <SelectItem value="50">50</SelectItem>
@@ -146,7 +146,7 @@ const filteredData = computed(() => {
 })
 
 const sorting = ref<SortingState>([])
-const pagination = ref({ pageIndex: 0, pageSize: '20' })
+const pagination = ref({ pageIndex: 0, pageSize: 20 })
 
 watch(search, () => {
   pagination.value.pageIndex = 0
@@ -160,6 +160,7 @@ watch(createdFrom, () => {
 watch(createdTo, () => {
   pagination.value.pageIndex = 0
 })
+
 const columns: ColumnDef<Item>[] = [
   { accessorKey: 'id', header: 'ID' },
   { accessorKey: 'name', header: 'Назва' },
