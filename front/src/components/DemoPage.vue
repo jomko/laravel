@@ -162,7 +162,7 @@ onMounted(() => {
       </Button>
 
       <!-- Main content (grid layout) -->
-      <main class="space-y-8 md:mt-24">
+      <main class="space-y-8 md:mt-10">
         <!-- Заголовок -->
         <div class="text-center">
           <h1 class="text-3xl font-bold text-primary">Морква 2.0 — Презентація інтерфейсу</h1>
@@ -392,6 +392,156 @@ onMounted(() => {
             </nav>
           </section>
         </div>
+
+        <div class="text-center">
+          <br>
+          <br>
+          <br>
+          <br>
+          <h1 class="text-3xl font-bold text-primary">Під капотом</h1>
+        </div>
+
+        <section>
+          <section class="prose max-w-3xl mx-auto py-12">
+<p class="mb-6">
+  Цей проєкт побудований як сучасна, headless‑SPA‑адмінка для управління товарами, цінами, складами й каналами продажу.
+</p>
+
+<!-- Основа -->
+<h2 class="text-xl font-semibold mt-10">🌱 Основа</h2>
+
+<h3 class="mt-6 font-medium">
+  <a href="https://vuejs.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Vue 3</a> + <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">TypeScript</a>
+</h3>
+<p>Модерний, реактивний фреймворк з composition API та повною підтримкою типів.</p>
+
+<h3 class="mt-4 font-medium">
+  <a href="https://vitejs.dev/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Vite</a>
+</h3>
+<p>Надшвидка збірка проєкту. Забезпечує миттєвий hot-reload, оптимізований білд, мінімальну конфігурацію.</p>
+
+<!-- Дані -->
+<h2 class="text-xl font-semibold mt-10">📊 Дані</h2>
+
+<h3 class="mt-6 font-medium">
+  <a href="https://tanstack.com/query/latest/docs/vue/overview" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">@tanstack/vue-query</a>
+</h3>
+<ul class="list-disc pl-6">
+  <li>автоматичний кеш</li>
+  <li>фонові оновлення</li>
+  <li>retry & error-handling</li>
+  <li>оптимістичні оновлення</li>
+</ul>
+<p>Це заміна ручного axios + loading/error-станів. Усі запити — через <code>useQuery()</code> / <code>useMutation()</code>.</p>
+
+<!-- Таблиці -->
+<h2 class="text-xl font-semibold mt-10">📋 Таблиці</h2>
+
+<h3 class="mt-6 font-medium">
+  <a href="https://tanstack.com/table/latest/docs/vue/overview" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">@tanstack/vue-table</a>
+</h3>
+<ul class="list-disc pl-6">
+  <li>сортування, фільтрація, пагінація</li>
+  <li>inline‑редагування</li>
+  <li>віртуалізація (через <code>@tanstack/virtual-core</code>)</li>
+  <li>повна кастомізація</li>
+</ul>
+<p>Усі таблиці оформлюються як <code>CarrotTable.vue</code> з конфігом колонок.</p>
+
+<!-- Форми -->
+<h2 class="text-xl font-semibold mt-10">✅ Форми</h2>
+
+<h3 class="mt-6 font-medium">
+  <a href="https://tanstack.com/form/latest/docs/overview" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">@tanstack/form</a>
+</h3>
+<ul class="list-disc pl-6">
+  <li>контроль за стейтом кожного поля</li>
+  <li>інтеграція з Zod для валідації</li>
+  <li>мінімум перерендерів</li>
+  <li>повний контроль над рендером</li>
+</ul>
+
+<!-- Валідація -->
+<h2 class="text-xl font-semibold mt-10">🖍️ Валідація</h2>
+
+<h3 class="mt-6 font-medium">
+  <a href="https://zod.dev/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Zod</a>
+</h3>
+<ul class="list-disc pl-6">
+  <li>TypeScript‑сумісна схема валідації</li>
+  <li>повна інтеграція з tanstack/form</li>
+  <li>валідація на фронті</li>
+  <li>декларативна форма типів + перевірки</li>
+</ul>
+
+<!-- Стан -->
+<h2 class="text-xl font-semibold mt-10">🧠 Глобальний стан</h2>
+
+<h3 class="mt-6 font-medium">
+  <a href="https://pinia.vuejs.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Pinia</a>
+</h3>
+<ul class="list-disc pl-6">
+  <li>автентифікація</li>
+  <li>CarrotAgent</li>
+  <li>глобальні UI‑стани (модальні, тема, мова)</li>
+</ul>
+<p>Все інше — через <code>vue-query</code>.</p>
+
+<!-- UI -->
+<h2 class="text-xl font-semibold mt-10">🎨 UI</h2>
+
+<h3 class="mt-6 font-medium">
+  <a href="https://ui.shadcn.dev/docs/components/vue" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">shadcn-vue</a>
+</h3>
+<ul class="list-disc pl-6">
+  <li>кнопки, алерти, модалки, інпути</li>
+  <li>працює без стилів — повна кастомізація</li>
+</ul>
+
+<!-- Стилі -->
+<h2 class="text-xl font-semibold mt-10">🎨 Стилі</h2>
+
+<h3 class="mt-6 font-medium">
+  <a href="https://tailwindcss.com/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Tailwind CSS</a>
+</h3>
+<ul class="list-disc pl-6">
+  <li>атомарні класи</li>
+  <li>повна кастомізація без .scss</li>
+  <li>простота темізації та адаптивності</li>
+</ul>
+
+<!-- Компоненти -->
+<h2 class="text-xl font-semibold mt-10">🧩 Компонентна структура</h2>
+
+<h3 class="mt-6 font-medium">CarrotKit</h3>
+<ul class="list-disc pl-6">
+  <li>CarrotTable.vue</li>
+  <li>CarrotForm.vue</li>
+  <li>CarrotDialog.vue</li>
+  <li>CarrotToast.vue</li>
+  <li>CarrotAgent.vue</li>
+</ul>
+
+<!-- Інше -->
+<h2 class="text-xl font-semibold mt-10">⚙️ Інше</h2>
+
+<ul class="list-disc pl-6">
+  <li><a href="https://router.vuejs.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Vue Router</a> — класичний SPA‑роутинг</li>
+  <li><a href="https://vueuse.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">VueUse</a> — утиліти: useClipboard, useDark, useElementSize</li>
+  <li><a href="https://vue-i18n.intlify.dev/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">i18n</a> — планується через vue-i18n</li>
+</ul>
+
+<!-- Філософія -->
+<h2 class="text-xl font-semibold mt-10">📐 Філософія</h2>
+<blockquote class="mt-4 italic border-l-4 border-orange-400 pl-4 text-gray-600">
+  "Headless first. Type-safe. Composition always. UI = data-driven + atomic."
+</blockquote>
+
+
+</section>
+
+        </section>
+
       </main>
 
       <Toaster position="top-right" />
