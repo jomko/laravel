@@ -14,6 +14,7 @@ import { useVueTable, getCoreRowModel, type ColumnDef } from '@tanstack/vue-tabl
 import { z } from 'zod'
 import 'vue-sonner/style.css'
 import { useColorMode } from '@vueuse/core'
+import CarrotTableDemo from '@/components/CarrotTableDemo.vue'
 import Chart from 'chart.js/auto'
 import {
   SliderRoot,
@@ -397,7 +398,7 @@ onMounted(() => {
           </section>
         </div>
 
-
+        <CarrotTableDemo class="mt-6" />
 
         <section>
         <div class="text-center under_hood">
