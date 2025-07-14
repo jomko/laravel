@@ -14,7 +14,9 @@ This project is a monorepo containing a Laravel API and a Vue 3 SPA. It does **n
 
 ```bash
 # Copy environment files
+
 cp backend/.env.ddev backend/.env
+
 cp frontend/.env.ddev frontend/.env
 
 # Start services and install dependencies
