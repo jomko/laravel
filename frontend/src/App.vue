@@ -1,10 +1,7 @@
 <script setup lang="ts">
-  import DemoPage from './components/DemoPage.vue'
+import DemoPage from './pages/DemoPage.vue'
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen py-2">
-    <img src="/logo.png" alt="">
-    <DemoPage  />
-  </div>
+  <DemoPage />
 </template>
