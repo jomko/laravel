@@ -15,6 +15,7 @@ import { z } from 'zod'
 import 'vue-sonner/style.css'
 import { useColorMode } from '@vueuse/core'
 import CarrotTableDemo from '@/components/CarrotTableDemo.vue'
+import BackendOverview from '@/components/BackendOverview.vue'
 import Chart from 'chart.js/auto'
 import {
   SliderRoot,
@@ -551,6 +552,10 @@ onMounted(() => {
 
 </section>
 
+        </section>
+
+        <section class="prose mx-auto py-12">  
+          <BackendOverview class="mt-6" />
         </section>
 
       </main>
