@@ -137,7 +137,7 @@ function copyCell(value: unknown) {
           <TableRow
             v-for="row in table.getRowModel().rows"
             :key="row.id"
-            class="group hover:bg-muted hover:scale-[.99] transition-all"
+            class="group hover:bg-muted hover:scale-[.99] transition-all duration-200"
           >
             <TableCell
               v-for="cell in row.getVisibleCells()"
