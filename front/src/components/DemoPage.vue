@@ -164,11 +164,6 @@ onMounted(() => {
 
       <!-- Main content (grid layout) -->
       <main class="space-y-8 md:mt-10">
-        <!-- Hero section -->
-        <section class="rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 py-20 text-center shadow-md animate-in fade-in-0">
-          <h1 class="mb-4 text-5xl font-extrabold text-primary">Морква 2.0</h1>
-          <p class="text-lg text-muted-foreground">Сучасний UI на максималках</p>
-        </section>
 
         <!-- Заголовок -->
         <div class="text-center">
