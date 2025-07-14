@@ -110,7 +110,6 @@ interface Item {
 function generateData(count = 10000): Item[] {
   const names = ['Морква', 'Яблуко', 'Картопля', 'Банан', 'Гречка', 'Молоко', 'Сир', 'Апельсин', 'Огірок', 'Рис', 'Сметана', 'Груша', 'Перець', 'Манго', 'Пшоно']
   const categories = ['Овочі', 'Фрукти', 'Крупи', 'Молочне']
-  const statuses = ['active', 'low', 'none', 'archived'] as const
 
   return Array.from({ length: count }, (_, i) => {
     const name = names[i % names.length]
