@@ -92,6 +92,8 @@ watch(statusFilter, (val) =>
 )
 
 const editingId = ref<number | null>(null)
+const editingField = ref<string | null>(null)
+
 const { copy } = useClipboard()
 function copyCell(value: unknown) {
   copy(String(value))
@@ -102,14 +104,13 @@ function copyCell(value: unknown) {
   <div class="space-y-2">
     <div class="flex gap-2">
       <Input v-model="search" placeholder="Search..." class="max-w-sm" />
-<Select v-model="statusFilter">
-  <SelectItem :value="'active'">active</SelectItem>
-  <SelectItem :value="'archived'">archived</SelectItem>
-  <SelectItem :value="'draft'">draft</SelectItem>
-</Select>
-
-
+      <Select v-model="statusFilter">
+        <SelectItem :value="'active'">active</SelectItem>
+        <SelectItem :value="'archived'">archived</SelectItem>
+        <SelectItem :value="'draft'">draft</SelectItem>
+      </Select>
     </div>
+
     <div class="max-h-[600px] overflow-y-scroll">
       <Table>
         <TableHeader>
@@ -145,14 +146,27 @@ function copyCell(value: unknown) {
               class="cursor-pointer group-hover:text-primary"
             >
               <template
-                v-if="cell.column.id === 'name' && editingId === row.original.id"
+                v-if="
+                  editingId === row.original.id &&
+                  editingField === cell.column.id &&
+                  ['name', 'price', 'stock'].includes(cell.column.id)
+                "
               >
-                <Input v-model="row.original.name" @blur="editingId = null" />
+                <Input
+                  :type="cell.column.id === 'name' ? 'text' : 'number'"
+                  v-model="(row.original as any)[cell.column.id]"
+                  @blur="
+                    editingId = null;
+                    editingField = null;
+                  "
+                />
               </template>
               <template v-else>
                 <span
                   @dblclick="
-                    cell.column.id === 'name' && (editingId = row.original.id)
+                    ['name', 'price', 'stock'].includes(cell.column.id)
+                      ? (editingId = row.original.id, editingField = cell.column.id)
+                      : null
                   "
                 >
                   {{ cell.getValue() }}
@@ -163,6 +177,7 @@ function copyCell(value: unknown) {
         </TableBody>
       </Table>
     </div>
+
     <div class="flex items-center justify-between">
       <Button
         variant="outline"

@@ -173,7 +173,7 @@ onMounted(() => {
         <!-- Grid for the content -->
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           <!-- Forms -->
-          <section id="forms" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="forms" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Форми: легше не буває</h2>
             <Input placeholder="Просто input" />
             <Textarea placeholder="А тут можна писати" />
@@ -188,7 +188,7 @@ onMounted(() => {
           </section>
 
           <!-- Buttons -->
-          <section id="buttons" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="buttons" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Кнопки для натискання (або не треба?)</h2>
             <div class="flex gap-2">
               <Button>Default</Button>
@@ -198,7 +198,7 @@ onMounted(() => {
           </section>
 
           <!-- Alerts & Toast -->
-          <section id="alerts" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="alerts" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Тости, модалки й інші принади</h2>
             <Alert>
               <Icon icon="radix-icons:info-circled" class="h-4 w-4" />
@@ -211,7 +211,7 @@ onMounted(() => {
           </section>
 
           <!-- Modal -->
-          <section id="modal" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="modal" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Модалка без зайвого пафосу</h2>
             <Dialog>
               <template #trigger>
@@ -223,7 +223,7 @@ onMounted(() => {
           </section>
 
           <!-- Table -->
-          <section id="table" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="table" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Табличка скромних розмірів</h2>
             <Table>
               <TableHeader>
@@ -245,7 +245,7 @@ onMounted(() => {
           </section>
 
           <!-- Validation -->
-          <section id="validation" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="validation" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Форма з валідацією (не плач, вона лагідна)</h2>
             <Input v-model="form.name" placeholder="Ім'я" />
             <p v-if="errors.name" class="text-sm text-red-500">{{ errors.name[0] }}</p>
@@ -255,7 +255,7 @@ onMounted(() => {
           </section>
 
           <!-- Charts -->
-          <section id="charts" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="charts" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Графіки</h2>
             <div class="h-48">
               <canvas ref="chartRef" class="h-full w-full"></canvas>
@@ -263,7 +263,7 @@ onMounted(() => {
           </section>
 
           <!-- Paginated Table -->
-          <section id="pagination-table" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="pagination-table" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Таблиця з пагінацією</h2>
             <Input v-model="search" placeholder="Пошук..." />
             <Table>
@@ -290,7 +290,7 @@ onMounted(() => {
           </section>
 
           <!-- Slider -->
-          <section id="slider" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="slider" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Слайдер</h2>
             <SliderRoot v-model="sliderValue" class="relative flex w-full touch-none select-none items-center">
               <SliderTrack class="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary">
@@ -302,7 +302,7 @@ onMounted(() => {
           </section>
 
           <!-- Tabs -->
-          <section id="tabs" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="tabs" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Таби</h2>
             <TabsRoot default-value="one" class="space-y-4">
               <TabsList class="flex space-x-2">
@@ -315,7 +315,7 @@ onMounted(() => {
           </section>
 
           <!-- Search -->
-          <section id="search" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="search" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Пошук</h2>
             <Input v-model="search" placeholder="Введіть ім'я..." />
             <ul class="list-disc pl-4">
@@ -324,7 +324,7 @@ onMounted(() => {
           </section>
 
           <!-- Accordion -->
-          <section id="accordion" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="accordion" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Акордеон</h2>
             <AccordionRoot type="single" collapsible>
               <AccordionItem value="item-1">
@@ -353,7 +353,7 @@ onMounted(() => {
           </section>
 
           <!-- Switch -->
-          <section id="switch" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="switch" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Перемикач</h2>
             <SwitchRoot v-model:checked="switchOn" class="relative inline-flex h-6 w-11 items-center rounded-full border border-input data-[state=checked]:bg-primary">
               <SwitchThumb class="inline-block h-4 w-4 translate-x-1 rounded-full bg-background shadow transition data-[state=checked]:translate-x-6" />
@@ -362,7 +362,7 @@ onMounted(() => {
           </section>
 
           <!-- Loader -->
-          <section id="loader" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="loader" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Завантаження</h2>
             <div class="flex justify-center">
               <div class="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
@@ -370,7 +370,7 @@ onMounted(() => {
           </section>
 
           <!-- Progress -->
-          <section id="progress" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="progress" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Прогрес</h2>
             <ProgressRoot :model-value="progress" :max="100" class="relative h-4 w-full overflow-hidden rounded-full bg-secondary">
               <ProgressIndicator class="h-full w-full flex-1 bg-primary transition-all" />
@@ -379,14 +379,14 @@ onMounted(() => {
           </section>
 
           <!-- Date -->
-          <section id="date" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="date" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Дата</h2>
             <Input type="date" v-model="selectedDate" />
             <p>Обрана дата: {{ selectedDate }}</p>
           </section>
 
           <!-- Breadcrumbs -->
-          <section id="breadcrumbs" class="rounded-xl bg-muted p-6 shadow-md transition-transform hover:scale-[1.02] space-y-4">
+          <section id="breadcrumbs" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
             <h2 class="text-xl font-semibold text-primary">Хлібні крихти</h2>
             <nav class="text-sm text-muted-foreground">
               <ol class="flex flex-wrap items-center gap-1">
