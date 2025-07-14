@@ -1,6 +1,12 @@
 # Local Development Guide
 
-This project is a Laravel API backend with a Vue 3 single-page application frontend. It does **not** use Blade templates, server-side rendering (SSR), or Vite SSR. Backend and frontend are developed and deployed separately.
+This project is a monorepo containing a Laravel API and a Vue 3 SPA. It does **not** use Blade templates, server-side rendering (SSR), or Vite SSR.
+
+## 📁 Project Structure
+
+- `backend/` – Laravel API
+- `frontend/` – Vue 3 SPA served by Vite
+- Docker/DDEV for local development
 
 ## ✅ Quick Start with DDEV
 
@@ -8,12 +14,14 @@ This project is a Laravel API backend with a Vue 3 single-page application front
 
 ```bash
 # Copy environment files
-cp .env.ddev .env
+
+cp backend/.env.ddev backend/.env
+
 cp frontend/.env.ddev frontend/.env
 
 # Start services and install dependencies
 ddev start
-ddev composer install
+ddev composer install --working-dir backend
 ddev artisan key:generate
 ddev artisan migrate --seed
 ```
@@ -67,8 +75,8 @@ Docs will be available at:
 Inside the `frontend/` directory:
 
 ```bash
-ddev npm install
-ddev npm run dev
+ddev npm install --working-dir frontend
+ddev npm run dev --working-dir frontend
 ```
 
 Vite will serve the app at [http://morkovka-frontend.ddev.site:5173](http://morkovka-frontend.ddev.site:5173)
