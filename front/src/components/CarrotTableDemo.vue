@@ -8,7 +8,7 @@
       </div>
       <div>
         <label class="block text-sm font-medium mb-1">Категорія</label>
-        <Select v-model="categoryFilter" :modelValue="categoryFilter" @update:modelValue="categoryFilter = $event">
+        <Select v-model="categoryFilter">
           <SelectItem value="">Всі</SelectItem>
           <SelectItem value="Овочі">Овочі</SelectItem>
           <SelectItem value="Фрукти">Фрукти</SelectItem>
@@ -65,7 +65,7 @@
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2">
         <span class="text-sm">Показати:</span>
-        <Select v-model="pagination.pageSize" :modelValue="pagination.pageSize" @update:modelValue="pagination.pageSize = $event">
+        <Select v-model="pagination.pageSize">
           <SelectItem value="10">10</SelectItem>
           <SelectItem value="20">20</SelectItem>
           <SelectItem value="50">50</SelectItem>
@@ -81,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { Input } from '@/components/ui/input'
 import { Select, SelectItem } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
@@ -95,6 +95,7 @@ import {
   type ColumnDef,
   type SortingState,
 } from '@tanstack/vue-table'
+import { useDebounceFn } from '@vueuse/core'
 
 interface Item {
   id: number
@@ -167,7 +168,10 @@ const table = useVueTable({
       return sorting.value
     },
     get pagination() {
-      return pagination.value
+      return {
+        ...pagination.value,
+        pageSize: Number(pagination.value.pageSize),
+      }
     },
   },
   onSortingChange: (updater) => {
