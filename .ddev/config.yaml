@@ -8,3 +8,5 @@ database:
   type: postgres
   version: "15"
 use_dns_when_possible: true
+additional_hostnames:
+  - morkovka-frontend
