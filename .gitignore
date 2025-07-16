@@ -1,15 +1,14 @@
 # Laravel
-/vendor
-/.env
-/.env.*
-/storage/*.key
-/storage/*.log
-/storage/framework/*
+/backend/vendor
+/backend/.env
+/backend/.env.*
+/backend/storage/*.key
+/backend/storage/*.log
+/backend/storage/framework/*
 !/storage/.gitignore
-/bootstrap/cache/*
-/public/storage
-Homestead.json
-Homestead.yaml
+/backend/bootstrap/cache/*
+/backend/public/storage
+
 
 # Laravel IDE helpers
 .phpstorm.meta.php

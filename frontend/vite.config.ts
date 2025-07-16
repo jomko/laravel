@@ -6,6 +6,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  root: __dirname,
   css: {
     postcss: {
       plugins: [tailwind(), autoprefixer()],
@@ -17,4 +18,10 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server:{
+    allowedHosts: ['morkovka-frontend.ddev.site'],
+    port: 5173, 
+    host: true,
+  }
 })
+
