@@ -27,6 +27,9 @@ ddev artisan migrate --seed
 ```
 
 - If you modify `.env` later, run `ddev restart` to apply the changes.
+- `.ddev/config.yaml` defines `additional_hostnames` for extra hostnames (e.g.,
+  `morkovka-frontend`). When you change this value, run `ddev restart` so DDEV
+  can regenerate its certificates and routing.
 
 ---
 
@@ -80,6 +83,10 @@ ddev npm run dev --working-dir frontend
 ```
 
 Vite will serve the app at [http://morkovka-frontend.ddev.site:5173](http://morkovka-frontend.ddev.site:5173)
+
+`frontend/vite.config.ts` configures `server.allowedHosts` to
+`morkovka-frontend.ddev.site` and the dev server listens on port **5173**.
+Running `npm run build` will create the production files in `frontend/dist/`.
 
 ---
 
