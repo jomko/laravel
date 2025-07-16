@@ -34,7 +34,7 @@ interface Item {
 }
 
 const statuses = ['active', 'archived', 'draft'] as const
-const categories = ['Овочі', 'Фрукти', 'Крупи', 'Молочне'] as const
+const categories = ['Vegetables', 'Fruits', 'Grains', 'Dairy'] as const
 
 function randomDate() {
   const d = new Date(+(new Date()) - Math.floor(Math.random() * 10000000000))
@@ -44,7 +44,7 @@ function randomDate() {
 function generateData(count = 10000): Item[] {
   return Array.from({ length: count }, (_, i) => ({
     id: i + 1,
-    name: `Товар ${i + 1}`,
+    name: `Item ${i + 1}`,
     category: categories[Math.floor(Math.random() * categories.length)],
     price: Math.floor(Math.random() * 500),
     stock: Math.floor(Math.random() * 200),
@@ -58,14 +58,14 @@ const data = ref<Item[]>(generateData())
 
 const columns: ColumnDef<Item>[] = [
   { accessorKey: 'id', header: 'ID' },
-  { accessorKey: 'name', header: 'Назва' },
-  { accessorKey: 'category', header: 'Категорія' },
-  { accessorKey: 'price', header: 'Ціна' },
-  { accessorKey: 'stock', header: 'Залишок' },
-  { accessorKey: 'createdAt', header: 'Створено' },
-  { accessorKey: 'updatedAt', header: 'Оновлено' },
-  { accessorKey: 'status', header: 'Статус' },
-  { accessorKey: 'actions', header: 'Дії' },
+  { accessorKey: 'name', header: 'Name' },
+  { accessorKey: 'category', header: 'Category' },
+  { accessorKey: 'price', header: 'Price' },
+  { accessorKey: 'stock', header: 'Stock' },
+  { accessorKey: 'createdAt', header: 'Created' },
+  { accessorKey: 'updatedAt', header: 'Updated' },
+  { accessorKey: 'status', header: 'Status' },
+  { accessorKey: 'actions', header: 'Actions' },
 ]
 
 const sorting = ref<SortingState>([])
@@ -111,12 +111,12 @@ watch(statusFilter, (val) =>
 <template>
   <div class="space-y-4 p-6">
     <div class="flex flex-wrap gap-4">
-      <Input v-model="search" placeholder="Пошук товару..." class="w-full sm:w-1/3" />
+      <Input v-model="search" placeholder="Search item..." class="w-full sm:w-1/3" />
       <Select v-model="statusFilter" class="w-full sm:w-1/3">
-        <SelectItem value="all">Всі статуси</SelectItem>
-        <SelectItem value="active">В наявності</SelectItem>
-        <SelectItem value="archived">Немає</SelectItem>
-        <SelectItem value="draft">Мало</SelectItem>
+        <SelectItem value="all">All statuses</SelectItem>
+        <SelectItem value="active">In stock</SelectItem>
+        <SelectItem value="archived">None</SelectItem>
+        <SelectItem value="draft">Low</SelectItem>
       </Select>
     </div>
 
@@ -164,17 +164,17 @@ watch(statusFilter, (val) =>
                 >
                   {{
                     cell.getValue() === 'active'
-                      ? 'В наявності'
+                      ? 'In stock'
                       : cell.getValue() === 'archived'
-                      ? 'Немає'
-                      : 'Мало'
+                      ? 'None'
+                      : 'Low'
                   }}
                 </span>
               </template>
 
               <!-- Дії -->
               <template v-else-if="cell.column.id === 'actions'">
-                <Button size="sm" variant="default">Редагувати</Button>
+                <Button size="sm" variant="default">Edit</Button>
               </template>
 
               <!-- Інше -->
@@ -194,7 +194,7 @@ watch(statusFilter, (val) =>
         @click="table.previousPage()"
         :disabled="!table.getCanPreviousPage()"
       >
-        Назад
+        Previous
       </Button>
       <span class="text-sm text-muted-foreground">
         {{ table.getState().pagination.pageIndex + 1 }} / {{ table.getPageCount() }}
@@ -205,7 +205,7 @@ watch(statusFilter, (val) =>
         @click="table.nextPage()"
         :disabled="!table.getCanNextPage()"
       >
-        Вперед
+        Next
       </Button>
     </div>
   </div>
