@@ -1,4 +1,3 @@
-import { useState, useMemo } from 'react'
 import {
   useReactTable,
   getCoreRowModel,
@@ -10,6 +9,7 @@ import {
 } from '@tanstack/react-table'
 import { useDebounce } from 'use-debounce'
 import { cn } from './lib/utils'
+import { useEffect, useState, useMemo } from 'react'
 
 function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
@@ -126,10 +126,15 @@ export default function CarrotTableDemo({ className = '' }: { className?: string
     getPaginationRowModel: getPaginationRowModel()
   })
 
-  const statusColumn = table.getColumn('status')
-  if (statusColumn) {
-    statusColumn.setFilterValue(statusFilter === 'all' ? undefined : statusFilter)
-  }
+
+
+  useEffect(() => {
+    const statusColumn = table.getColumn('status')
+    if (statusColumn) {
+      statusColumn.setFilterValue(statusFilter === 'all' ? undefined : statusFilter)
+    }
+  }, [statusFilter, table])
+
 
   return (
     <div className={cn('space-y-4 p-6', className)}>

@@ -139,6 +139,7 @@ export default function DemoPage() {
   const schema = z.object({ name: z.string().min(1, 'Enter a name'), email: z.string().email('Invalid email') })
 
   const chartRef = useRef<HTMLCanvasElement | null>(null)
+  const chartInstanceRef = useRef<Chart | null>(null)
   const [sliderValue, setSliderValue] = useState([50])
   const [switchOn, setSwitchOn] = useState(false)
   const [progress, setProgress] = useState(30)
@@ -165,7 +166,13 @@ export default function DemoPage() {
 
   useEffect(() => {
     if (chartRef.current) {
-      new Chart(chartRef.current, {
+      // Знищити попередній графік, якщо існує
+      if (chartInstanceRef.current) {
+        chartInstanceRef.current.destroy()
+      }
+
+      // Створити новий
+      chartInstanceRef.current = new Chart(chartRef.current, {
         type: 'bar',
         data: {
           labels: ['Jan', 'Feb', 'Mar', 'Apr'],
@@ -177,8 +184,18 @@ export default function DemoPage() {
             }
           ]
         },
-        options: { responsive: true, maintainAspectRatio: false }
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
       })
+    }
+
+    // Знищити графік при unmount
+    return () => {
+      if (chartInstanceRef.current) {
+        chartInstanceRef.current.destroy()
+      }
     }
   }, [])
 
@@ -225,7 +242,7 @@ export default function DemoPage() {
 
         <main className="space-y-8 md:mt-10">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-primary">Morkovka 2.0 — Interface Showcase</h1>
+            <h1 className="text-3xl font-bold text-primary">Morkovka 2.0 — Same shit on React</h1>
             <p className="text-center text-muted-foreground">What can we do here besides nuts?</p>
           </div>
 
@@ -500,66 +517,6 @@ export default function DemoPage() {
             <CarrotTableDemo className="mt-6" />
           </section>
 
-          <section>
-            <div className="text-center under_hood">
-              <h1 className="text-3xl font-bold text-primary">Under the Hood</h1>
-            </div>
-            <section className="prose max-w-3xl mx-auto py-12">
-              <p className="mb-6">
-                This project is a modern headless SPA admin panel for managing products, prices, warehouses and sales channels.
-              </p>
-              <h2 className="text-xl font-semibold mt-10">🌱 Foundation</h2>
-              <p>
-                <a href="https://vuejs.org/" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">Vue 3</a>{' '}
-                +{' '}
-                <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">TypeScript</a>{' '}
-                with{' '}
-                <a href="https://vitejs.dev/" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">Vite</a> for fast hot reload.
-              </p>
-              <h2 className="text-xl font-semibold mt-10">📊 Data</h2>
-              <p>
-                <a href="https://tanstack.com/query/latest/docs/vue/overview" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">@tanstack/vue-query</a>{' '}
-                handles caching and optimistic updates via <code>useQuery()</code> and <code>useMutation()</code>.
-              </p>
-              <h2 className="text-xl font-semibold mt-10">📋 Tables</h2>
-              <p>
-                <a href="https://tanstack.com/table/latest/docs/vue/overview" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">@tanstack/vue-table</a>{' '}
-                powers sorting, filtering and pagination with virtualization in <code>CarrotTable.vue</code>.
-              </p>
-              <h2 className="text-xl font-semibold mt-10">✅ Forms</h2>
-              <p>
-                <a href="https://tanstack.com/form/latest/docs/overview" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">@tanstack/form</a>{' '}
-                with{' '}
-                <a href="https://zod.dev/" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">Zod</a> for typed validation.
-              </p>
-              <h2 className="text-xl font-semibold mt-10">🧠 State</h2>
-              <p>
-                <a href="https://pinia.vuejs.org/" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">Pinia</a> manages auth and global UI state. Other state lives in vue-query.
-              </p>
-              <h2 className="text-xl font-semibold mt-10">🎨 UI</h2>
-              <p>
-                <a href="https://ui.shadcn.dev/docs/components/vue" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">shadcn-vue</a>{' '}
-                components with{' '}
-                <a href="https://tailwindcss.com/" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">Tailwind CSS</a>.
-              </p>
-              <h2 className="text-xl font-semibold mt-10">🧩 Components</h2>
-              <p>CarrotKit provides CarrotTable.vue, CarrotForm.vue, CarrotDialog.vue, CarrotToast.vue and CarrotAgent.vue.</p>
-              <h2 className="text-xl font-semibold mt-10">⚙️ Other</h2>
-              <p>
-                Uses <a href="https://router.vuejs.org/" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">Vue Router</a>,{' '}
-                <a href="https://vueuse.org/" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">VueUse</a> utilities and planned{' '}
-                <a href="https://vue-i18n.intlify.dev/" target="_blank" rel="noopener" className="underline text-blue-600 hover:text-blue-800">vue-i18n</a>.
-              </p>
-              <h2 className="text-xl font-semibold mt-10">📐 Philosophy</h2>
-              <blockquote className="mt-4 italic border-l-4 border-orange-400 pl-4 text-gray-600">
-                "Headless first. Type-safe. Composition always. UI = data-driven + atomic."
-              </blockquote>
-            </section>
-          </section>
-
-          <section className="prose mx-auto py-12">
-            <BackendOverview className="mt-6" />
-          </section>
         </main>
 
         <Toaster position="top-right" />

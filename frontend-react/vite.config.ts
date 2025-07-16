@@ -16,10 +16,5 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
-  },
-  server: {
-    allowedHosts: ['morkovka-frontend.ddev.site'],
-    port: 5173,
-    host: true,
-  },
+  }
 })
