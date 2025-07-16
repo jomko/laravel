@@ -24,6 +24,21 @@ ddev artisan key:generate
 ddev artisan migrate --seed
 ```
 
+### Selecting an Environment
+
+Environment templates exist for staging and production. To use them, copy the
+appropriate file to `.env` before starting services:
+
+```bash
+# Staging
+cp backend/.env.staging backend/.env
+cp frontend/.env.staging frontend/.env
+
+# Production
+cp backend/.env.production backend/.env
+cp frontend/.env.production frontend/.env
+```
+
 - If you modify `.env` later, run `ddev restart` to apply the changes.
 
 ---
