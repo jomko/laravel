@@ -20,23 +20,36 @@ import {
   type ColumnDef,
   type SortingState,
 } from '@tanstack/vue-table'
-import { useClipboard, useDebounceFn } from '@vueuse/core'
+import { useDebounceFn } from '@vueuse/core'
 
 interface Item {
   id: number
   name: string
+  category: string
   price: number
   stock: number
+  createdAt: string
+  updatedAt: string
   status: 'active' | 'archived' | 'draft'
 }
 
-function generateData(count = 1000): Item[] {
-  const statuses = ['active', 'archived', 'draft'] as const
+const statuses = ['active', 'archived', 'draft'] as const
+const categories = ['Овочі', 'Фрукти', 'Крупи', 'Молочне'] as const
+
+function randomDate() {
+  const d = new Date(+(new Date()) - Math.floor(Math.random() * 10000000000))
+  return d.toISOString().slice(0, 10)
+}
+
+function generateData(count = 10000): Item[] {
   return Array.from({ length: count }, (_, i) => ({
     id: i + 1,
-    name: `Product ${i + 1}`,
-    price: Math.floor(Math.random() * 1000) / 10,
-    stock: Math.floor(Math.random() * 100),
+    name: `Товар ${i + 1}`,
+    category: categories[Math.floor(Math.random() * categories.length)],
+    price: Math.floor(Math.random() * 500),
+    stock: Math.floor(Math.random() * 200),
+    createdAt: randomDate(),
+    updatedAt: randomDate(),
     status: statuses[Math.floor(Math.random() * statuses.length)],
   }))
 }
@@ -45,14 +58,18 @@ const data = ref<Item[]>(generateData())
 
 const columns: ColumnDef<Item>[] = [
   { accessorKey: 'id', header: 'ID' },
-  { accessorKey: 'name', header: 'Name' },
-  { accessorKey: 'price', header: 'Price' },
-  { accessorKey: 'stock', header: 'Stock' },
-  { accessorKey: 'status', header: 'Status' },
+  { accessorKey: 'name', header: 'Назва' },
+  { accessorKey: 'category', header: 'Категорія' },
+  { accessorKey: 'price', header: 'Ціна' },
+  { accessorKey: 'stock', header: 'Залишок' },
+  { accessorKey: 'createdAt', header: 'Створено' },
+  { accessorKey: 'updatedAt', header: 'Оновлено' },
+  { accessorKey: 'status', header: 'Статус' },
+  { accessorKey: 'actions', header: 'Дії' },
 ]
 
 const sorting = ref<SortingState>([])
-const pagination = ref({ pageIndex: 0, pageSize: 10 })
+const pagination = ref({ pageIndex: 0, pageSize: 20 })
 
 const table = useVueTable({
   data,
@@ -66,12 +83,10 @@ const table = useVueTable({
     },
   },
   onSortingChange: (updater) => {
-    sorting.value =
-      typeof updater === 'function' ? updater(sorting.value) : updater
+    sorting.value = typeof updater === 'function' ? updater(sorting.value) : updater
   },
   onPaginationChange: (updater) => {
-    pagination.value =
-      typeof updater === 'function' ? updater(pagination.value) : updater
+    pagination.value = typeof updater === 'function' ? updater(pagination.value) : updater
   },
   getCoreRowModel: getCoreRowModel(),
   getSortedRowModel: getSortedRowModel(),
@@ -81,49 +96,43 @@ const table = useVueTable({
 
 const search = ref('')
 const debouncedSearch = ref('')
-const statusFilter = ref('')
 const updateSearch = useDebounceFn((val: string) => {
   debouncedSearch.value = val
 }, 300)
 watch(search, (val) => updateSearch(val))
 watch(debouncedSearch, (val) => table.setGlobalFilter(val))
+
+const statusFilter = ref('')
 watch(statusFilter, (val) =>
-  table.getColumn('status')?.setFilterValue(val || undefined)
+  table.getColumn('status')?.setFilterValue(val === 'all' ? undefined : val)
 )
-
-const editingId = ref<number | null>(null)
-const editingField = ref<string | null>(null)
-
-const { copy } = useClipboard()
-function copyCell(value: unknown) {
-  copy(String(value))
-}
 </script>
 
 <template>
-  <div class="space-y-2">
-    <div class="flex gap-2">
-      <Input v-model="search" placeholder="Search..." class="max-w-sm" />
-      <Select v-model="statusFilter">
-        <SelectItem :value="'active'">active</SelectItem>
-        <SelectItem :value="'archived'">archived</SelectItem>
-        <SelectItem :value="'draft'">draft</SelectItem>
+  <div class="space-y-4 p-6">
+    <div class="flex flex-wrap gap-4">
+      <Input v-model="search" placeholder="Пошук товару..." class="w-full sm:w-1/3" />
+      <Select v-model="statusFilter" class="w-full sm:w-1/3">
+        <SelectItem value="all">Всі статуси</SelectItem>
+        <SelectItem value="active">В наявності</SelectItem>
+        <SelectItem value="archived">Немає</SelectItem>
+        <SelectItem value="draft">Мало</SelectItem>
       </Select>
     </div>
 
-    <div class="max-h-[600px] overflow-y-scroll">
+    <div class="overflow-auto max-h-[700px] rounded-md border">
       <Table>
         <TableHeader>
           <TableRow
             v-for="headerGroup in table.getHeaderGroups()"
             :key="headerGroup.id"
-            class="sticky top-0 bg-background"
+            class="sticky top-0 bg-background z-10"
           >
             <TableHead
               v-for="header in headerGroup.headers"
               :key="header.id"
+              class="whitespace-nowrap select-none cursor-pointer"
               @click="header.column.getCanSort() && header.column.toggleSorting()"
-              class="cursor-pointer select-none"
             >
               <span v-if="!header.isPlaceholder">
                 {{ header.column.columnDef.header }}
@@ -137,40 +146,40 @@ function copyCell(value: unknown) {
           <TableRow
             v-for="row in table.getRowModel().rows"
             :key="row.id"
-            class="group hover:bg-muted hover:scale-[.99] transition-all duration-200"
+            class="hover:bg-muted transition-all"
           >
             <TableCell
               v-for="cell in row.getVisibleCells()"
               :key="cell.id"
-              @click="copyCell(cell.getValue())"
-              class="cursor-pointer group-hover:text-primary"
+              class="whitespace-nowrap"
             >
-              <template
-                v-if="
-                  editingId === row.original.id &&
-                  editingField === cell.column.id &&
-                  ['name', 'price', 'stock'].includes(cell.column.id)
-                "
-              >
-                <Input
-                  :type="cell.column.id === 'name' ? 'text' : 'number'"
-                  v-model="(row.original as any)[cell.column.id]"
-                  @blur="
-                    editingId = null;
-                    editingField = null;
-                  "
-                />
-              </template>
-              <template v-else>
+              <!-- Статус -->
+              <template v-if="cell.column.id === 'status'">
                 <span
-                  @dblclick="
-                    ['name', 'price', 'stock'].includes(cell.column.id)
-                      ? (editingId = row.original.id, editingField = cell.column.id)
-                      : null
-                  "
+                  :class="{
+                    'bg-green-100 text-green-700 px-2 py-0.5 rounded text-sm': cell.getValue() === 'active',
+                    'bg-red-100 text-red-700 px-2 py-0.5 rounded text-sm': cell.getValue() === 'archived',
+                    'bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-sm': cell.getValue() === 'draft',
+                  }"
                 >
-                  {{ cell.getValue() }}
+                  {{
+                    cell.getValue() === 'active'
+                      ? 'В наявності'
+                      : cell.getValue() === 'archived'
+                      ? 'Немає'
+                      : 'Мало'
+                  }}
                 </span>
+              </template>
+
+              <!-- Дії -->
+              <template v-else-if="cell.column.id === 'actions'">
+                <Button size="sm" variant="default">Редагувати</Button>
+              </template>
+
+              <!-- Інше -->
+              <template v-else>
+                {{ cell.getValue() }}
               </template>
             </TableCell>
           </TableRow>
@@ -178,25 +187,25 @@ function copyCell(value: unknown) {
       </Table>
     </div>
 
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between pt-2">
       <Button
         variant="outline"
-        size="xs"
+        size="sm"
         @click="table.previousPage()"
         :disabled="!table.getCanPreviousPage()"
       >
-        Prev
+        Назад
       </Button>
-      <span>
+      <span class="text-sm text-muted-foreground">
         {{ table.getState().pagination.pageIndex + 1 }} / {{ table.getPageCount() }}
       </span>
       <Button
         variant="outline"
-        size="xs"
+        size="sm"
         @click="table.nextPage()"
         :disabled="!table.getCanNextPage()"
       >
-        Next
+        Вперед
       </Button>
     </div>
   </div>
