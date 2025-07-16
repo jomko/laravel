@@ -1,121 +1,121 @@
 <template>
   <section class="max-w-4xl mx-auto px-6 py-12 font-sans text-gray-800 dark:text-gray-100 space-y-10">
     <div>
-      <h1 class="text-3xl font-bold mb-4">🔧 Backend — Морква 2.0</h1>
+      <h1 class="text-3xl font-bold mb-4">🔧 Backend </h1>
     </div>
 
-    <!-- Архітектура -->
+    <!-- Architecture -->
     <div>
-      <h2 class="text-xl font-semibold mb-3">🧠 Архітектура</h2>
+      <h2 class="text-xl font-semibold mb-3">🧠 Architecture</h2>
       <ul class="list-disc list-inside space-y-1">
-        <li><b>Фреймворк:</b> Laravel </li>
-        <li><b>Призначення:</b> API-only backend (жодного Blade, SSR чи Inertia)</li>
-        <li><b>Організація:</b> монорепо: <code>backend/</code> + <code>frontend/</code> + dev контейнер</li>
-        <li><b>Фронтенд:</b> окрема PWA на Vue 3</li>
-        <li><b>API-first:</b> весь UI працює через REST API</li>
+        <li><b>Framework:</b> Laravel</li>
+        <li><b>Purpose:</b> API-only backend</li>
+        <li><b>Structure:</b> monorepo with <code>backend/</code> and <code>frontend/</code> plus dev container</li>
+        <li><b>Frontend:</b> separate Vue 3 PWA</li>
+        <li><b>API-first:</b> all UI via REST</li>
       </ul>
     </div>
 
-    <!-- База даних -->
+    <!-- Database -->
     <div>
-      <h2 class="text-xl font-semibold mb-3">🗃 База даних</h2>
+      <h2 class="text-xl font-semibold mb-3">🗃 Database</h2>
       <ul class="list-disc list-inside space-y-1">
-        <li><b>PostgreSQL:</b> UUID як primary key, оптимізована під SKU-логіку</li>
-        <li><b>Redis:</b> кеш, черги, Horizon</li>
+        <li><b>PostgreSQL:</b> UUID primary keys tuned for SKU logic</li>
+        <li><b>Redis:</b> cache, queues, Horizon</li>
       </ul>
     </div>
 
-    <!-- Черги -->
+    <!-- Queues -->
     <div>
-      <h2 class="text-xl font-semibold mb-3">🚦 Черги та задачі</h2>
+      <h2 class="text-xl font-semibold mb-3">🚦 Queues and jobs</h2>
       <ul class="list-disc list-inside space-y-1">
-        <li><b>Laravel Queues:</b> обробка синхронізацій, імпортів, експорту</li>
-        <li><b>Horizon:</b> моніторинг черг</li>
-        <li><b>Scheduler:</b> cron-задачі</li>
+        <li><b>Laravel Queues:</b> handle syncs, imports and exports</li>
+        <li><b>Horizon:</b> queue monitoring</li>
+        <li><b>Scheduler:</b> cron jobs</li>
       </ul>
     </div>
 
-    <!-- Основні модулі -->
+    <!-- Modules -->
     <div>
-      <h2 class="text-xl font-semibold mb-3">⚙️ Основні модулі</h2>
+      <h2 class="text-xl font-semibold mb-3">⚙️ Key modules</h2>
       <ul class="list-disc list-inside space-y-1">
-        <li><b>SKU Engine:</b> дедуплікація, псевдоніми, зіставлення</li>
-        <li><b>Inventory:</b> залишки, рух, локації складу</li>
-        <li><b>Orders:</b> статуси, етапи, джерела замовлень</li>
+        <li><b>SKU Engine:</b> deduplication, aliases, mapping</li>
+        <li><b>Inventory:</b> stock, movement, locations</li>
+        <li><b>Orders:</b> statuses, stages, sources</li>
         <li><b>Pricing Engine:</b> wholesale / retail / marketplace</li>
         <li><b>Channels:</b> Etsy / Woo / Faire / eBay / Walmart</li>
-        <li><b>Label Creator:</b> PDF-генерація етикеток</li>
-        <li><b>SKU Microservice:</b> FastAPI-сервіс для SKU-логіки</li>
+        <li><b>Label Creator:</b> PDF labels</li>
+        <li><b>SKU Microservice:</b> FastAPI service for SKU logic</li>
       </ul>
     </div>
 
-    <!-- Безпека -->
+    <!-- Security -->
     <div>
-      <h2 class="text-xl font-semibold mb-3">🔐 Безпека</h2>
+      <h2 class="text-xl font-semibold mb-3">🔐 Security</h2>
       <ul class="list-disc list-inside space-y-1">
         <li><b>Laravel Sanctum:</b> token-based auth</li>
-        <li><b>Role-based доступ:</b> admin / staff / etc.</li>
-        <li><b>Middleware-фільтри:</b> контроль доступу</li>
-        <li><b>Rate limiting + аудит:</b> захист та логування</li>
+        <li><b>Role-based access:</b> admin / staff / etc.</li>
+        <li><b>Middleware filters:</b> access control</li>
+        <li><b>Rate limiting + audit:</b> protection and logging</li>
       </ul>
     </div>
 
-    <!-- Інфраструктура -->
+    <!-- Infrastructure -->
     <div>
-      <h2 class="text-xl font-semibold mb-3">🚀 Інфраструктура</h2>
+      <h2 class="text-xl font-semibold mb-3">🚀 Infrastructure</h2>
       <ul class="list-disc list-inside space-y-1">
-        <li><b>Dev-середовище:</b> DDEV (nginx + php + postgres + redis)</li>
-        <li><b>Конфігурація:</b> .env для середовищ (dev, staging, prod)</li>
+        <li><b>Dev environment:</b> DDEV (nginx + php + postgres + redis)</li>
+        <li><b>Config:</b> .env for dev, staging and prod</li>
       </ul>
     </div>
 
-    <!-- Документація -->
+    <!-- Documentation -->
     <div>
-      <h2 class="text-xl font-semibold mb-3">📚 Документація API</h2>
+      <h2 class="text-xl font-semibold mb-3">📚 API Documentation</h2>
       <ul class="list-disc list-inside space-y-1">
-        <li><b>Swagger (Laravel Spectator):</b> автоматична генерація OpenAPI-специфікації</li>
-        <li><b>Postman/Insomnia:</b> підтримка готових колекцій</li>
-        <li><b>JSON:API-формат:</b> уніфіковані відповіді, чітка структура</li>
+        <li><b>Swagger (Laravel Spectator):</b> auto-generates OpenAPI spec</li>
+        <li><b>Postman/Insomnia:</b> ready collections</li>
+        <li><b>JSON:API format:</b> consistent responses</li>
       </ul>
     </div>
 
-    <!-- Тестування -->
+    <!-- Testing -->
     <div>
-      <h2 class="text-xl font-semibold mb-3">🧪 Тестування</h2>
+      <h2 class="text-xl font-semibold mb-3">🧪 Testing</h2>
       <ul class="list-disc list-inside space-y-1">
-        <li><b>PHPUnit + Laravel Factories:</b> юніт- і інтеграційні тести</li>
-        <li><b>Feature-тести:</b> критичні бізнес-кейси</li>
-        <li><b>Покриття:</b> ключові модулі протестовані</li>
+        <li><b>PHPUnit + Laravel Factories:</b> unit and integration tests</li>
+        <li><b>Feature tests:</b> key business cases</li>
+        <li><b>Coverage:</b> core modules tested</li>
       </ul>
     </div>
 
-    <!-- Модульність -->
+    <!-- Modularity -->
     <div>
-      <h2 class="text-xl font-semibold mb-3">🧩 Модульність</h2>
+      <h2 class="text-xl font-semibold mb-3">🧩 Modularity</h2>
       <ul class="list-disc list-inside space-y-1">
-        <li><b>Розділені сервіси:</b> SKU-логіка винесена у FastAPI</li>
-        <li><b>Контейнерна архітектура:</b> DDEV дозволяє швидкий старт</li>
-        <li><b>Власні Laravel-пакети:</b> планується для масштабування</li>
+        <li><b>Split services:</b> SKU logic in FastAPI</li>
+        <li><b>Container architecture:</b> DDEV for quick start</li>
+        <li><b>Custom Laravel packages:</b> planned for scale</li>
       </ul>
     </div>
 
-    <!-- Моніторинг -->
+    <!-- Monitoring -->
     <div>
-      <h2 class="text-xl font-semibold mb-3">🔍 Моніторинг і логи</h2>
+      <h2 class="text-xl font-semibold mb-3">🔍 Monitoring & logs</h2>
       <ul class="list-disc list-inside space-y-1">
-        <li><b>Telescope (локально):</b> дебаг та профілювання</li>
-        <li><b>Лог-канали:</b> поділені на категорії (наприклад, platforms.log)</li>
-        <li><b>Sentry/Logtail:</b> планується централізоване логування</li>
+        <li><b>Telescope (local):</b> debug and profiling</li>
+        <li><b>Log channels:</b> category based</li>
+        <li><b>Sentry/Logtail:</b> planned centralized logging</li>
       </ul>
     </div>
 
-    <!-- Локалізація -->
+    <!-- Localization -->
     <div>
-      <h2 class="text-xl font-semibold mb-3">🌐 Локалізація та мультимовність</h2>
+      <h2 class="text-xl font-semibold mb-3">🌐 Localization</h2>
       <ul class="list-disc list-inside space-y-1">
-        <li><b>Канали з підтримкою мов:</b> eBay, Faire, Etsy</li>
-        <li><b>Локалізація полів:</b> назви, опис, SEO-мета</li>
-        <li><b>i18n-фронт:</b> підтримка API через Vue i18n</li>
+        <li><b>Channels with languages:</b> eBay, Faire, Etsy</li>
+        <li><b>Field localization:</b> names, description, SEO meta</li>
+        <li><b>i18n frontend:</b> API support via Vue i18n</li>
       </ul>
     </div>
   </section>

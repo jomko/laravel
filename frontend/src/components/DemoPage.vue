@@ -45,15 +45,15 @@ interface Person {
 
 const columns: ColumnDef<Person>[] = [
   { accessorKey: 'id', header: 'ID' },
-  { accessorKey: 'name', header: "Ім'я" },
-  { accessorKey: 'status', header: 'Статус' },
+  { accessorKey: 'name', header: 'Name' },
+  { accessorKey: 'status', header: 'Status' },
 ]
 
 const tableData = ref<Person[]>([
-  { id: 1, name: 'Богдан', status: 'Активний' },
-  { id: 2, name: 'Юра', status: 'П\'є пиво' },
-  { id: 3, name: 'Антон', status: 'На морі' },
-  { id: 4, name: 'Вона', status: 'Працює' },
+  { id: 1, name: 'Bohdan', status: 'Active' },
+  { id: 2, name: 'Yura', status: 'Drinking beer' },
+  { id: 3, name: 'Anton', status: 'At the beach' },
+  { id: 4, name: 'She', status: 'Working' },
 ])
 
 const table = useVueTable({
@@ -66,19 +66,19 @@ const form = ref({ name: '', email: '', agree: false, status: '' })
 const errors = ref<{ name?: string[]; email?: string[] }>({})
 
 const schema = z.object({
-  name: z.string().min(1, "Вкажіть ім'я"),
-  email: z.string().email('Невірна пошта'),
+  name: z.string().min(1, 'Enter a name'),
+  email: z.string().email('Invalid email'),
 })
 
 function submit() {
   const result = schema.safeParse(form.value)
   if (!result.success) {
     errors.value = result.error.flatten().fieldErrors
-    toast('Форма має помилки, ай-яй-яй!')
+    toast('The form has errors!')
     return
   }
   errors.value = {}
-  toast('Форма відправлена! Але це ще нічого не означає.')
+  toast('Form submitted! But that does not mean much.')
 }
 
 const mode = useColorMode({ attribute: 'class', selector: 'html', initialValue: 'dark' })
@@ -127,7 +127,7 @@ onMounted(() => {
         labels: ['Jan', 'Feb', 'Mar', 'Apr'],
         datasets: [
           {
-            label: 'Продажі',
+            label: 'Sales',
             data: [12, 19, 3, 5],
             backgroundColor: 'rgb(96,165,250)',
           },
@@ -168,30 +168,30 @@ onMounted(() => {
 
         <!-- Заголовок -->
         <div class="text-center">
-          <h1 class="text-3xl font-bold text-primary">Морква 2.0 — Презентація інтерфейсу</h1>
-          <p class="text-center text-muted-foreground">Що ми тут можемо, крім горішків?</p>
+          <h1 class="text-3xl font-bold text-primary">Morkovka 2.0 — Interface Showcase</h1>
+          <p class="text-center text-muted-foreground">What can we do here besides nuts?</p>
         </div>
 
         <!-- Grid for the content -->
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           <!-- Forms -->
           <section id="forms" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Форми: легше не буває</h2>
-            <Input placeholder="Просто input" />
-            <Textarea placeholder="А тут можна писати" />
+            <h2 class="text-xl font-semibold text-primary">Forms: easy as can be</h2>
+            <Input placeholder="Just input" />
+            <Textarea placeholder="You can type here" />
             <Select v-model="form.status">
-              <SelectItem value="one">Опція 1</SelectItem>
-              <SelectItem value="two">Опція 2</SelectItem>
+              <SelectItem value="one">Option 1</SelectItem>
+              <SelectItem value="two">Option 2</SelectItem>
             </Select>
             <div class="group flex items-center space-x-2">
               <Checkbox v-model="form.agree" class="transition-transform group-hover:scale-110" />
-              <span>Погоджуюсь з тим, що це жарт</span>
+              <span>I agree this is a joke</span>
             </div>
           </section>
 
           <!-- Buttons -->
           <section id="buttons" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Кнопки для натискання (або не треба?)</h2>
+            <h2 class="text-xl font-semibold text-primary">Buttons to press (or not?)</h2>
             <div class="flex gap-2">
               <Button>Default</Button>
               <Button variant="ghost">Ghost</Button>
@@ -201,32 +201,32 @@ onMounted(() => {
 
           <!-- Alerts & Toast -->
           <section id="alerts" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Тости, модалки й інші принади</h2>
+            <h2 class="text-xl font-semibold text-primary">Toasts, modals and other goodies</h2>
             <Alert>
               <Icon icon="radix-icons:info-circled" class="h-4 w-4" />
               <div>
-                <AlertTitle>Ну і що тепер?</AlertTitle>
-                <AlertDescription>Невеличкий приклад алерту.</AlertDescription>
+                <AlertTitle>So what now?</AlertTitle>
+                <AlertDescription>A small alert example.</AlertDescription>
               </div>
             </Alert>
-            <Button @click="toast('Ви щойно натиснули. І що?')">Викликати toast</Button>
+            <Button @click="toast('You just clicked. So what?')">Show toast</Button>
           </section>
 
           <!-- Modal -->
           <section id="modal" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Модалка без зайвого пафосу</h2>
+            <h2 class="text-xl font-semibold text-primary">Simple modal</h2>
             <Dialog>
               <template #trigger>
-                <Button>Відкрити модалку</Button>
+                <Button>Open modal</Button>
               </template>
-              <template #title>Привіт!</template>
-              <template #description>Ти відкрив модалку. Молодець!</template>
+              <template #title>Hello!</template>
+              <template #description>You opened the modal. Well done!</template>
             </Dialog>
           </section>
 
           <!-- Table -->
           <section id="table" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Табличка скромних розмірів</h2>
+            <h2 class="text-xl font-semibold text-primary">Small table</h2>
             <Table>
               <TableHeader>
                 <TableRow v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
@@ -242,23 +242,23 @@ onMounted(() => {
                   </TableCell>
                 </TableRow>
               </TableBody>
-              <TableCaption>Суто фейкові дані</TableCaption>
+              <TableCaption>Fake data only</TableCaption>
             </Table>
           </section>
 
           <!-- Validation -->
           <section id="validation" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Форма з валідацією (не плач, вона лагідна)</h2>
-            <Input v-model="form.name" placeholder="Ім'я" />
+            <h2 class="text-xl font-semibold text-primary">Form with validation (don't cry, it's gentle)</h2>
+            <Input v-model="form.name" placeholder="Name" />
             <p v-if="errors.name" class="text-sm text-red-500">{{ errors.name[0] }}</p>
-            <Input v-model="form.email" placeholder="Пошта" />
+            <Input v-model="form.email" placeholder="Email" />
             <p v-if="errors.email" class="text-sm text-red-500">{{ errors.email[0] }}</p>
-            <Button @click="submit">Надіслати</Button>
+            <Button @click="submit">Submit</Button>
           </section>
 
           <!-- Charts -->
           <section id="charts" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Графіки</h2>
+            <h2 class="text-xl font-semibold text-primary">Charts</h2>
             <div class="h-48">
               <canvas ref="chartRef" class="h-full w-full"></canvas>
             </div>
@@ -266,8 +266,8 @@ onMounted(() => {
 
           <!-- Paginated Table -->
           <section id="pagination-table" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Таблиця з пагінацією</h2>
-            <Input v-model="search" placeholder="Пошук..." />
+            <h2 class="text-xl font-semibold text-primary">Table with pagination</h2>
+            <Input v-model="search" placeholder="Search..." />
             <Table>
               <TableHeader>
                 <TableRow v-for="headerGroup in paginatedTable.getHeaderGroups()" :key="headerGroup.id">
@@ -285,41 +285,41 @@ onMounted(() => {
               </TableBody>
             </Table>
             <div class="flex items-center justify-between">
-              <Button variant="outline" size="xs" @click="prevPage" :disabled="currentPage===1">Назад</Button>
+              <Button variant="outline" size="xs" @click="prevPage" :disabled="currentPage===1">Previous</Button>
               <span>{{ currentPage }} / {{ totalPages }}</span>
-              <Button variant="outline" size="xs" @click="nextPage" :disabled="currentPage===totalPages">Вперед</Button>
+              <Button variant="outline" size="xs" @click="nextPage" :disabled="currentPage===totalPages">Next</Button>
             </div>
           </section>
 
           <!-- Slider -->
           <section id="slider" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Слайдер</h2>
+            <h2 class="text-xl font-semibold text-primary">Slider</h2>
             <SliderRoot v-model="sliderValue" class="relative flex w-full touch-none select-none items-center">
               <SliderTrack class="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary">
                 <SliderRange class="absolute h-full bg-primary" />
               </SliderTrack>
               <SliderThumb class="block h-5 w-5 rounded-full border-2 border-primary bg-background shadow" />
             </SliderRoot>
-            <div>Значення: {{ sliderValue[0] }}</div>
+            <div>Value: {{ sliderValue[0] }}</div>
           </section>
 
           <!-- Tabs -->
           <section id="tabs" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Таби</h2>
+            <h2 class="text-xl font-semibold text-primary">Tabs</h2>
             <TabsRoot default-value="one" class="space-y-4">
               <TabsList class="flex space-x-2">
-                <TabsTrigger value="one" class="px-3 py-1 rounded-md bg-secondary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Один</TabsTrigger>
-                <TabsTrigger value="two" class="px-3 py-1 rounded-md bg-secondary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Два</TabsTrigger>
+                <TabsTrigger value="one" class="px-3 py-1 rounded-md bg-secondary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">One</TabsTrigger>
+                <TabsTrigger value="two" class="px-3 py-1 rounded-md bg-secondary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Two</TabsTrigger>
               </TabsList>
-              <TabsContent value="one">Перший контент</TabsContent>
-              <TabsContent value="two">Другий контент</TabsContent>
+              <TabsContent value="one">First content</TabsContent>
+              <TabsContent value="two">Second content</TabsContent>
             </TabsRoot>
           </section>
 
           <!-- Search -->
           <section id="search" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Пошук</h2>
-            <Input v-model="search" placeholder="Введіть ім'я..." />
+            <h2 class="text-xl font-semibold text-primary">Search</h2>
+            <Input v-model="search" placeholder="Enter a name..." />
             <ul class="list-disc pl-4">
               <li v-for="item in filteredData" :key="item.id">{{ item.name }}</li>
             </ul>
@@ -327,45 +327,46 @@ onMounted(() => {
 
           <!-- Accordion -->
           <section id="accordion" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Акордеон</h2>
+            <h2 class="text-xl font-semibold text-primary">Accordion</h2>
             <AccordionRoot type="single" collapsible>
               <AccordionItem value="item-1">
                 <h3>
                   <AccordionTrigger class="flex w-full items-center justify-between py-2 transition-transform">
-                    <span>Пункт 1</span>
+                    <span>Item 1</span>
                     <span class="inline-block transition-transform data-[state=open]:rotate-180">
                       <Icon icon="radix-icons:chevron-down" />
                     </span>
                   </AccordionTrigger>
                 </h3>
-                <AccordionContent class="pt-2">Трохи тексту 1.</AccordionContent>
+                <AccordionContent class="pt-2">Some text 1.</AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
                 <h3>
                   <AccordionTrigger class="flex w-full items-center justify-between py-2 transition-transform">
-                    <span>Пункт 2</span>
+                    <span>Item 2</span>
                     <span class="inline-block transition-transform data-[state=open]:rotate-180">
                       <Icon icon="radix-icons:chevron-down" />
                     </span>
                   </AccordionTrigger>
                 </h3>
-                <AccordionContent class="pt-2">Ще трохи тексту 2.</AccordionContent>
+                <AccordionContent class="pt-2">Some more text 2.</AccordionContent>
               </AccordionItem>
             </AccordionRoot>
           </section>
 
           <!-- Switch -->
-          <section id="switch" class="rounded-xl bg-muted p-6 shadow-md transition-transform space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Перемикач</h2>
+
+          <section id="switch" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
+            <h2 class="text-xl font-semibold text-primary">Switch</h2>
             <SwitchRoot v-model:checked="switchOn" class="relative inline-flex h-6 w-11 items-center rounded-full border border-input data-[state=checked]:bg-primary">
               <SwitchThumb class="inline-block h-4 w-4 translate-x-1 rounded-full bg-background shadow transition data-[state=checked]:translate-x-6" />
             </SwitchRoot>
-            <p>Стан: {{ switchOn ? 'On' : 'Off' }}</p>
+            <p>State: {{ switchOn ? 'On' : 'Off' }}</p>
           </section>
 
           <!-- Loader -->
           <section id="loader" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Завантаження</h2>
+            <h2 class="text-xl font-semibold text-primary">Loading</h2>
             <div class="flex justify-center">
               <div class="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
             </div>
@@ -373,28 +374,28 @@ onMounted(() => {
 
           <!-- Progress -->
           <section id="progress" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Прогрес</h2>
+            <h2 class="text-xl font-semibold text-primary">Progress</h2>
             <ProgressRoot :model-value="progress" :max="100" class="relative h-4 w-full overflow-hidden rounded-full bg-secondary">
               <ProgressIndicator class="h-full w-full flex-1 bg-primary transition-all" />
             </ProgressRoot>
-            <Button size="xs" @click="progress = Math.min(100, progress + 10)">Додати 10%</Button>
+            <Button size="xs" @click="progress = Math.min(100, progress + 10)">Add 10%</Button>
           </section>
 
           <!-- Date -->
           <section id="date" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Дата</h2>
+            <h2 class="text-xl font-semibold text-primary">Date</h2>
             <Input type="date" v-model="selectedDate" />
-            <p>Обрана дата: {{ selectedDate }}</p>
+            <p>Selected date: {{ selectedDate }}</p>
           </section>
 
           <!-- Breadcrumbs -->
           <section id="breadcrumbs" class="rounded-xl bg-muted p-6 shadow-md transition-transform  space-y-4">
-            <h2 class="text-xl font-semibold text-primary">Хлібні крихти</h2>
+            <h2 class="text-xl font-semibold text-primary">Breadcrumbs</h2>
             <nav class="text-sm text-muted-foreground">
               <ol class="flex flex-wrap items-center gap-1">
-                <li><a href="#" class="text-primary hover:underline">Головна</a><span class="mx-1">/</span></li>
-                <li><a href="#" class="text-primary hover:underline">Розділ</a><span class="mx-1">/</span></li>
-                <li>Поточна сторінка</li>
+                <li><a href="#" class="text-primary hover:underline">Home</a><span class="mx-1">/</span></li>
+                <li><a href="#" class="text-primary hover:underline">Section</a><span class="mx-1">/</span></li>
+                <li>Current page</li>
               </ol>
             </nav>
           </section>
@@ -402,155 +403,54 @@ onMounted(() => {
 
         <section class="prose mx-auto py-12">
           <div class="text-center">
-            <h1 class="text-3xl font-bold text-primary">Ух-ти, табличка!</h1>
-            <p class="text-center text-muted-foreground">фільтрує, шукає і має 10k рядків</p>
-          </div>  
+            <h1 class="text-3xl font-bold text-primary">Wow, a table!</h1>
+            <p class="text-center text-muted-foreground">filters, searches and has 10k rows</p>
+          </div>
           <CarrotTableDemo class="mt-6" />
         </section>
         
 
         <section>
-        <div class="text-center under_hood">
-          <h1 class="text-3xl font-bold text-primary">Під капотом</h1>
-        </div>
+          <div class="text-center under_hood">
+            <h1 class="text-3xl font-bold text-primary">Under the Hood</h1>
+          </div>
 
           <section class="prose max-w-3xl mx-auto py-12">
-          <p class="mb-6">
-            Цей проєкт побудований як сучасна, headless‑SPA‑адмінка для управління товарами, цінами, складами й каналами продажу.
-          </p>
 
-          <!-- Основа -->
-          <h2 class="text-xl font-semibold mt-10">🌱 Основа</h2>
+            <p class="mb-6">
+              This project is a modern headless SPA admin panel for managing products, prices, warehouses and sales channels.
+            </p>
 
-          <h3 class="mt-6 font-medium">
-            <a href="https://vuejs.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Vue 3</a> + <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">TypeScript</a>
-          </h3>
-          <p>Модерний, реактивний фреймворк з composition API та повною підтримкою типів.</p>
+            <h2 class="text-xl font-semibold mt-10">🌱 Foundation</h2>
+            <p><a href="https://vuejs.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Vue 3</a> + <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">TypeScript</a> with <a href="https://vitejs.dev/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Vite</a> for fast hot reload.</p>
 
-          <h3 class="mt-4 font-medium">
-            <a href="https://vitejs.dev/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Vite</a>
-          </h3>
-          <p>Надшвидка збірка проєкту. Забезпечує миттєвий hot-reload, оптимізований білд, мінімальну конфігурацію.</p>
+            <h2 class="text-xl font-semibold mt-10">📊 Data</h2>
+            <p><a href="https://tanstack.com/query/latest/docs/vue/overview" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">@tanstack/vue-query</a> handles caching and optimistic updates via <code>useQuery()</code> and <code>useMutation()</code>.</p>
 
-          <!-- Дані -->
-          <h2 class="text-xl font-semibold mt-10">📊 Дані</h2>
+            <h2 class="text-xl font-semibold mt-10">📋 Tables</h2>
+            <p><a href="https://tanstack.com/table/latest/docs/vue/overview" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">@tanstack/vue-table</a> powers sorting, filtering and pagination with virtualization in <code>CarrotTable.vue</code>.</p>
 
-          <h3 class="mt-6 font-medium">
-            <a href="https://tanstack.com/query/latest/docs/vue/overview" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">@tanstack/vue-query</a>
-          </h3>
-          <ul class="list-disc pl-6">
-            <li>автоматичний кеш</li>
-            <li>фонові оновлення</li>
-            <li>retry & error-handling</li>
-            <li>оптимістичні оновлення</li>
-          </ul>
-          <p>Це заміна ручного axios + loading/error-станів. Усі запити — через <code>useQuery()</code> / <code>useMutation()</code>.</p>
+            <h2 class="text-xl font-semibold mt-10">✅ Forms</h2>
+            <p><a href="https://tanstack.com/form/latest/docs/overview" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">@tanstack/form</a> with <a href="https://zod.dev/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Zod</a> for typed validation.</p>
 
-          <!-- Таблиці -->
-          <h2 class="text-xl font-semibold mt-10">📋 Таблиці</h2>
+            <h2 class="text-xl font-semibold mt-10">🧠 State</h2>
+            <p><a href="https://pinia.vuejs.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Pinia</a> manages auth and global UI state. Other state lives in vue-query.</p>
 
-          <h3 class="mt-6 font-medium">
-            <a href="https://tanstack.com/table/latest/docs/vue/overview" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">@tanstack/vue-table</a>
-          </h3>
-          <ul class="list-disc pl-6">
-            <li>сортування, фільтрація, пагінація</li>
-            <li>inline‑редагування</li>
-            <li>віртуалізація (через <code>@tanstack/virtual-core</code>)</li>
-            <li>повна кастомізація</li>
-          </ul>
-          <p>Усі таблиці оформлюються як <code>CarrotTable.vue</code> з конфігом колонок.</p>
+            <h2 class="text-xl font-semibold mt-10">🎨 UI</h2>
+            <p><a href="https://ui.shadcn.dev/docs/components/vue" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">shadcn-vue</a> components with <a href="https://tailwindcss.com/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Tailwind CSS</a>.</p>
 
-          <!-- Форми -->
-          <h2 class="text-xl font-semibold mt-10">✅ Форми</h2>
+            <h2 class="text-xl font-semibold mt-10">🧩 Components</h2>
+            <p>CarrotKit provides CarrotTable.vue, CarrotForm.vue, CarrotDialog.vue, CarrotToast.vue and CarrotAgent.vue.</p>
 
-          <h3 class="mt-6 font-medium">
-            <a href="https://tanstack.com/form/latest/docs/overview" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">@tanstack/form</a>
-          </h3>
-          <ul class="list-disc pl-6">
-            <li>контроль за стейтом кожного поля</li>
-            <li>інтеграція з Zod для валідації</li>
-            <li>мінімум перерендерів</li>
-            <li>повний контроль над рендером</li>
-          </ul>
+            <h2 class="text-xl font-semibold mt-10">⚙️ Other</h2>
+            <p>Uses <a href="https://router.vuejs.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Vue Router</a>, <a href="https://vueuse.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">VueUse</a> utilities and planned <a href="https://vue-i18n.intlify.dev/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">vue-i18n</a>.</p>
 
-          <!-- Валідація -->
-          <h2 class="text-xl font-semibold mt-10">🖍️ Валідація</h2>
+            <h2 class="text-xl font-semibold mt-10">📐 Philosophy</h2>
+            <blockquote class="mt-4 italic border-l-4 border-orange-400 pl-4 text-gray-600">
+              "Headless first. Type-safe. Composition always. UI = data-driven + atomic."
+            </blockquote>
 
-          <h3 class="mt-6 font-medium">
-            <a href="https://zod.dev/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Zod</a>
-          </h3>
-          <ul class="list-disc pl-6">
-            <li>TypeScript‑сумісна схема валідації</li>
-            <li>повна інтеграція з tanstack/form</li>
-            <li>валідація на фронті</li>
-            <li>декларативна форма типів + перевірки</li>
-          </ul>
-
-          <!-- Стан -->
-          <h2 class="text-xl font-semibold mt-10">🧠 Глобальний стан</h2>
-
-          <h3 class="mt-6 font-medium">
-            <a href="https://pinia.vuejs.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Pinia</a>
-          </h3>
-          <ul class="list-disc pl-6">
-            <li>автентифікація</li>
-            <li>CarrotAgent</li>
-            <li>глобальні UI‑стани (модальні, тема, мова)</li>
-          </ul>
-          <p>Все інше — через <code>vue-query</code>.</p>
-
-          <!-- UI -->
-          <h2 class="text-xl font-semibold mt-10">🎨 UI</h2>
-
-          <h3 class="mt-6 font-medium">
-            <a href="https://ui.shadcn.dev/docs/components/vue" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">shadcn-vue</a>
-          </h3>
-          <ul class="list-disc pl-6">
-            <li>кнопки, алерти, модалки, інпути</li>
-            <li>працює без стилів — повна кастомізація</li>
-          </ul>
-
-          <!-- Стилі -->
-          <h2 class="text-xl font-semibold mt-10">🎨 Стилі</h2>
-
-          <h3 class="mt-6 font-medium">
-            <a href="https://tailwindcss.com/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Tailwind CSS</a>
-          </h3>
-          <ul class="list-disc pl-6">
-            <li>атомарні класи</li>
-            <li>повна кастомізація без .scss</li>
-            <li>простота темізації та адаптивності</li>
-          </ul>
-
-          <!-- Компоненти -->
-          <h2 class="text-xl font-semibold mt-10">🧩 Компонентна структура</h2>
-
-          <h3 class="mt-6 font-medium">CarrotKit</h3>
-          <ul class="list-disc pl-6">
-            <li>CarrotTable.vue</li>
-            <li>CarrotForm.vue</li>
-            <li>CarrotDialog.vue</li>
-            <li>CarrotToast.vue</li>
-            <li>CarrotAgent.vue</li>
-          </ul>
-
-          <!-- Інше -->
-          <h2 class="text-xl font-semibold mt-10">⚙️ Інше</h2>
-
-          <ul class="list-disc pl-6">
-            <li><a href="https://router.vuejs.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">Vue Router</a> — класичний SPA‑роутинг</li>
-            <li><a href="https://vueuse.org/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">VueUse</a> — утиліти: useClipboard, useDark, useElementSize</li>
-            <li><a href="https://vue-i18n.intlify.dev/" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">i18n</a> — планується через vue-i18n</li>
-          </ul>
-
-          <!-- Філософія -->
-          <h2 class="text-xl font-semibold mt-10">📐 Філософія</h2>
-          <blockquote class="mt-4 italic border-l-4 border-orange-400 pl-4 text-gray-600">
-            "Headless first. Type-safe. Composition always. UI = data-driven + atomic."
-          </blockquote>
-
-
-        </section>
+          </section>
 
         </section>
 

@@ -20,8 +20,23 @@ cp frontend/.env.ddev frontend/.env
 # Start services and install dependencies
 ddev start
 ddev composer install --working-dir backend
-ddev artisan key:generate
-ddev artisan migrate --seed
+ddev exec php backend/artisan key:generate
+ddev exec php backend/artisan migrate --seed
+```
+
+### Selecting an Environment
+
+Environment templates exist for staging and production. To use them, copy the
+appropriate file to `.env` before starting services:
+
+```bash
+# Staging
+cp backend/.env.staging backend/.env
+cp frontend/.env.staging frontend/.env
+
+# Production
+cp backend/.env.production backend/.env
+cp frontend/.env.production frontend/.env
 ```
 
 - If you modify `.env` later, run `ddev restart` to apply the changes.
@@ -73,12 +88,12 @@ Docs will be available at:
 Inside the `frontend/` directory:
 
 ```bash
-ddev npm install --working-dir frontend
-ddev npm run dev --working-dir frontend
+npm install
+npm run dev
 ```
 
-Vite will serve the app at [http://morkovka-frontend.ddev.site:5173](http://morkovka-frontend.ddev.site:5173)
-
+Vite will serve the app at [http://localhost:5173](http://localhost:5173)
+If the port is busy, it will pick the next available one (e.g. 5174)
 ---
 
 ## 🔒 CORS and CSRF Notes
