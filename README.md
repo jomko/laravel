@@ -95,6 +95,7 @@ npm run dev
 
 Vite will serve the app at [http://localhost:5173](http://localhost:5173)
 If the port is busy, it will pick the next available one (e.g. 5174)
+
 ---
 
 ## 🔒 CORS and CSRF Notes
