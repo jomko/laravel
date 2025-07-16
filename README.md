@@ -20,8 +20,9 @@ cp frontend/.env.ddev frontend/.env
 # Start services and install dependencies
 ddev start
 ddev composer install --working-dir backend
-ddev artisan key:generate
-ddev artisan migrate --seed
+cp backend/.env.ddev backend/.env
+ddev exec php backend/artisan key:generate
+ddev exec php backend/artisan migrate --seed
 ```
 
 ### Selecting an Environment
