@@ -1,5 +1,6 @@
 # Laravel
 /vendor
+backend/vendor/
 /.env
 /.env.*
 /storage/*.key
