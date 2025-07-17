@@ -54,6 +54,7 @@ import {
   CardFooter,
 } from '@/components/ui/card'
 import axios from 'axios'
+import { toast } from '@/components/ui/sonner'
 
 const email = ref('')
 const password = ref('')
@@ -62,12 +63,13 @@ const userStore = useUserStore()
 
 const login = async () => {
   try {
+    await axios.get('/sanctum/csrf-cookie')
     const { data } = await axios.post('/api/login', { email: email.value, password: password.value })
     axios.defaults.headers.common.Authorization = `Bearer ${data.token}`
     userStore.setUser(data.user)
     router.push('/')
   } catch (e) {
-    alert('Invalid credentials')
+    toast.error('Invalid credentials')
   }
 }
 
