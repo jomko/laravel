@@ -5,14 +5,12 @@
       class="rounded-xl border bg-card text-card-foreground shadow p-8 max-w-md mx-auto space-y-6"
     >
       <div class="space-y-2 text-center">
-        <h3 class="text-2xl font-semibold tracking-tight">Create an account</h3>
-        <p class="text-sm text-muted-foreground">
-          Enter your email below to create your account
-        </p>
+        <h3 class="text-2xl font-semibold tracking-tight">Welcome back</h3>
+        <p class="text-sm text-muted-foreground">Enter your email and password to log in to your account</p>
       </div>
-      <Button variant="outline" class="w-full">
+      <Button variant="outline" class="w-full" @click="googleLogin">
         <span class="mr-2">G</span>
-        Google
+        Continue with Google
       </Button>
       <div class="relative">
         <div class="absolute inset-0 flex items-center">
@@ -22,9 +20,16 @@
           <span class="bg-card px-2 text-muted-foreground">Or continue with</span>
         </div>
       </div>
-      <Input v-model="email" placeholder="m@example.com" type="email" />
-      <Input v-model="password" placeholder="Password" type="password" />
-      <Button type="submit" class="w-full">Create account</Button>
+      <Input v-model="email" placeholder="you@example.com" type="email" />
+      <Input v-model="password" placeholder="••••••••" type="password" />
+      <div class="text-right">
+        <a href="/forgot-password" class="text-xs text-muted-foreground hover:underline">Forgot your password?</a>
+      </div>
+      <Button type="submit" class="w-full">Log in</Button>
+      <p class="text-sm text-center text-muted-foreground">
+        Don’t have an account?
+        <a href="/register" class="underline hover:text-primary">Sign up</a>
+      </p>
     </form>
   </div>
 </template>
@@ -32,7 +37,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -49,7 +53,11 @@ const login = async () => {
     userStore.setUser(data.user)
     router.push('/')
   } catch (e) {
-    alert('Невірний email або пароль')
+    alert('Invalid credentials')
   }
+}
+
+const googleLogin = () => {
+  window.location.href = '/auth/google'
 }
 </script>
