@@ -1,9 +1,13 @@
 <script setup lang="ts">
-  import DemoPage from './components/DemoPage.vue'
+<<<<<<< HEAD  import DemoPage from './components/DemoPage.vue'
   import Login from './pages/Login.vue'
   import { useUserStore } from '@/stores/user'
+  import { useAuth } from '@/composables/useAuth'
 
   const userStore = useUserStore()
+  // Load authenticated user data if a valid token exists
+  useAuth()
+
 </script>
 
 <template>
