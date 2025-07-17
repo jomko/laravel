@@ -10,7 +10,7 @@
           Enter your email below to create your account
         </p>
       </div>
-      <Button variant="outline" class="w-full">
+      <Button variant="outline" class="w-full" @click="googleLogin">
         <span class="mr-2">G</span>
         Google
       </Button>
@@ -24,7 +24,14 @@
       </div>
       <Input v-model="email" placeholder="m@example.com" type="email" />
       <Input v-model="password" placeholder="Password" type="password" />
+      <div class="text-right">
+        <a href="/forgot-password" class="text-xs text-muted-foreground hover:underline">Forgot password?</a>
+      </div>
       <Button type="submit" class="w-full">Create account</Button>
+      <p class="text-sm text-center text-muted-foreground">
+        Already have an account?
+        <a href="/login" class="underline hover:text-primary">Log in</a>
+      </p>
     </form>
   </div>
 </template>
@@ -49,7 +56,11 @@ const login = async () => {
     userStore.setUser(data.user)
     router.push('/')
   } catch (e) {
-    alert('Невірний email або пароль')
+    alert('Wrong credentials')
   }
+}
+
+const googleLogin = () => {
+  window.location.href = '/auth/google'
 }
 </script>
