@@ -1,10 +1,30 @@
 <template>
   <div class="min-h-screen flex items-center justify-center bg-muted">
-    <form @submit.prevent="login" class="space-y-4 bg-white p-8 shadow-xl rounded-xl w-full max-w-sm">
-      <h1 class="text-xl font-semibold">Вхід до Моркви</h1>
-      <Input v-model="email" placeholder="Email" type="email" />
-      <Input v-model="password" placeholder="Пароль" type="password" />
-      <Button type="submit" class="w-full">Увійти</Button>
+    <form
+      @submit.prevent="login"
+      class="rounded-xl border bg-card text-card-foreground shadow p-8 max-w-md mx-auto space-y-6"
+    >
+      <div class="space-y-2 text-center">
+        <h3 class="text-2xl font-semibold tracking-tight">Create an account</h3>
+        <p class="text-sm text-muted-foreground">
+          Enter your email below to create your account
+        </p>
+      </div>
+      <Button variant="outline" class="w-full">
+        <span class="mr-2">G</span>
+        Google
+      </Button>
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+          <span class="w-full border-t"></span>
+        </div>
+        <div class="relative flex justify-center text-xs uppercase">
+          <span class="bg-card px-2 text-muted-foreground">Or continue with</span>
+        </div>
+      </div>
+      <Input v-model="email" placeholder="m@example.com" type="email" />
+      <Input v-model="password" placeholder="Password" type="password" />
+      <Button type="submit" class="w-full">Create account</Button>
     </form>
   </div>
 </template>
