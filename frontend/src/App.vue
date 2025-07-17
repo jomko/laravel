@@ -1,5 +1,9 @@
 <script setup lang="ts">
-  import DemoPage from './components/DemoPage.vue'
+import DemoPage from './components/DemoPage.vue'
+import { useAuth } from '@/composables/useAuth'
+
+// Load authenticated user data if a valid token exists
+useAuth()
 </script>
 
 <template>
