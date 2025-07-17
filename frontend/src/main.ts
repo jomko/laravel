@@ -3,7 +3,15 @@ import App from './App.vue'
 import './assets/index.css'
 import { VueQueryPlugin } from '@tanstack/vue-query'
 import { vueQueryPluginOptions } from './plugins/vueQuery'
+import { createPinia } from 'pinia'
+import router from './router'
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:5173'
+axios.defaults.withCredentials = true
 
 const app = createApp(App)
+app.use(createPinia())
+app.use(router)
 app.use(VueQueryPlugin, vueQueryPluginOptions)
 app.mount('#app')
