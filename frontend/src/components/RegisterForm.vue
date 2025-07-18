@@ -23,6 +23,7 @@ const register = async () => {
       password: password.value,
     })
     axios.defaults.headers.common.Authorization = `Bearer ${data.token}`
+    localStorage.setItem('token', data.token)
     userStore.setUser(data.user)
   } catch (e) {
     alert('Registration failed')
