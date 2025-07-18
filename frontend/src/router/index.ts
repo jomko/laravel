@@ -1,13 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HelloWorldPage from '@/components/HelloWorldPage.vue'
+import { useUserStore } from '@/stores/user'
 
 const routes = [
-  { path: '/', component: HelloWorldPage },
+    {
+        path: '/',
+        component: () => import('@/components/HelloWorldPage.vue'),
+        meta: { requiresAuth: true },
+    },
+    {
+        path: '/login',
+        component: () => import('@/components/LoginPage.vue'),
+    },
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+    history: createWebHistory(),
+    routes,
+})
+
+router.beforeEach((to) => {
+    const userStore = useUserStore()
+    if (to.meta.requiresAuth && !userStore.user) {
+        return { path: '/login', query: { redirect: to.fullPath } }
+    }
 })
 
 export default router
