@@ -104,6 +104,7 @@ To support cross-domain authentication:
 
 - Make sure `SANCTUM_STATEFUL_DOMAINS` includes the frontend domain (e.g., `morkovka-frontend.ddev.site:5173`)
 - CORS settings in `config/cors.php` must allow the origin
+- The frontend must call `/sanctum/csrf-cookie` before attempting to log in so that Laravel sets the CSRF token cookie
 
 ---
 

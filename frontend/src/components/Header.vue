@@ -1,5 +1,27 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+
+import { useUserStore } from '@/stores/user'
+
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@/components/ui/dropdown-menu'
+
+
+const userStore = useUserStore()
+function logout() {
+
+const router = useRouter()
+const userStore = useUserStore()
+
+function logout() {
+  userStore.logout()
+  router.push('/login')
+
+}
 </script>
 
 <template>
@@ -7,8 +29,15 @@ import { Icon } from '@iconify/vue'
     <div class="flex items-center">
       <img src="/logo.png" alt="Logo" class="h-8" />
     </div>
-    <button class="p-2">
-      <Icon icon="lucide:user" class="w-6 h-6" />
-    </button>
+    <DropdownMenu>
+      <DropdownMenuTrigger as-child>
+        <button class="p-2">
+          <Icon icon="lucide:user" class="w-6 h-6" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem @select="logout">Logout</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   </header>
 </template>
