@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+
+import { useUserStore } from '@/stores/user'
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu'
-import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/user'
+
+
+const userStore = useUserStore()
+function logout() {
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -15,6 +20,7 @@ const userStore = useUserStore()
 function logout() {
   userStore.logout()
   router.push('/login')
+
 }
 </script>
 
@@ -30,7 +36,7 @@ function logout() {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem @click="logout">Logout</DropdownMenuItem>
+        <DropdownMenuItem @select="logout">Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   </header>

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import router from '@/router'
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -9,10 +10,12 @@ export const useUserStore = defineStore('user', {
         setUser(user: any) {
             this.user = user
         },
-        logout() {
+        async logout() {
+            await axios.post('/api/logout')
             this.user = null
             localStorage.removeItem('token')
             delete axios.defaults.headers.common.Authorization
+            router.push('/login')
         },
     },
 })
