@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import ForgotPasswordForm from '@/components/ForgotPasswordForm.vue'
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
 
 const mode = ref<'login' | 'forgot'>('login')
 const email = ref('')
@@ -35,14 +36,21 @@ async function login() {
   <div class="min-h-screen flex flex-col items-center justify-center space-y-8">
     <img src="/logo.png" alt="Logo" class="h-16" />
     <ForgotPasswordForm v-if="mode === 'forgot'" @switch="mode = $event" />
-    <form v-else @submit.prevent="login" class="w-full max-w-sm space-y-4">
-      <Input v-model="email" type="email" placeholder="Email" />
-      <Input v-model="password" type="password" placeholder="Password" />
-      <p v-if="error" class="text-red-500 text-sm">{{ error }}</p>
-      <div class="text-right">
-        <button type="button" class="text-xs underline" @click="mode = 'forgot'">Forgot password?</button>
-      </div>
-      <Button type="submit" class="w-full">Log in</Button>
-    </form>
+    <Card v-else class="mx-auto w-full max-w-md">
+      <CardHeader class="space-y-2 text-center">
+        <CardTitle>Login</CardTitle>
+      </CardHeader>
+      <CardContent class="space-y-4">
+        <Input v-model="email" type="email" placeholder="Email" />
+        <Input v-model="password" type="password" placeholder="Password" />
+        <p v-if="error" class="text-red-500 text-sm">{{ error }}</p>
+        <div class="text-right">
+          <button type="button" class="text-xs underline" @click="mode = 'forgot'">Forgot password?</button>
+        </div>
+      </CardContent>
+      <CardFooter class="flex flex-col space-y-4">
+        <Button type="submit" class="w-full">Log in</Button>
+      </CardFooter>      
+    </Card>  
   </div>
 </template>
