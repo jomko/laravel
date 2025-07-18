@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
@@ -14,6 +14,14 @@ const password = ref('')
 const error = ref<string | null>(null)
 const userStore = useUserStore()
 const router = useRouter()
+
+watch(
+  () => userStore.user,
+  (user) => {
+    if (user) router.push('/dashboard')
+  },
+  { immediate: true }
+)
 
 async function login() {
   error.value = null
@@ -36,21 +44,23 @@ async function login() {
   <div class="min-h-screen flex flex-col items-center justify-center space-y-8">
     <img src="/logo.png" alt="Logo" class="h-16" />
     <ForgotPasswordForm v-if="mode === 'forgot'" @switch="mode = $event" />
-    <Card v-else class="mx-auto w-full max-w-md">
-      <CardHeader class="space-y-2 text-center">
+    <form v-else class="w-full" @submit.prevent="login">
+      <Card class="mx-auto w-full max-w-md">
+        <CardHeader class="space-y-2 text-center">
         <CardTitle>Login</CardTitle>
-      </CardHeader>
-      <CardContent class="space-y-4">
+        </CardHeader>
+        <CardContent class="space-y-4">
         <Input v-model="email" type="email" placeholder="Email" />
         <Input v-model="password" type="password" placeholder="Password" />
         <p v-if="error" class="text-red-500 text-sm">{{ error }}</p>
         <div class="text-right">
           <button type="button" class="text-xs underline" @click="mode = 'forgot'">Forgot password?</button>
         </div>
-      </CardContent>
-      <CardFooter class="flex flex-col space-y-4">
-        <Button type="submit" class="w-full">Log in</Button>
-      </CardFooter>      
-    </Card>  
+        </CardContent>
+        <CardFooter class="flex flex-col space-y-4">
+          <Button type="submit" class="w-full">Log in</Button>
+        </CardFooter>
+      </Card>
+    </form>
   </div>
 </template>
