@@ -96,6 +96,19 @@ npm run dev
 Vite will serve the app at [http://localhost:5173](http://localhost:5173)
 If the port is busy, it will pick the next available one (e.g. 5174)
 
+### Sanctum Authentication Flow
+
+The SPA authenticates with the API using Laravel Sanctum and the following
+endpoints:
+
+1. `GET /sanctum/csrf-cookie`
+2. `POST /api/login`
+3. `GET /api/user`
+4. `POST /api/logout`
+
+Successful login redirects the browser to `/dashboard` and logging out sends the
+user back to `/login`.
+
 ---
 
 ## 🔒 CORS and CSRF Notes
