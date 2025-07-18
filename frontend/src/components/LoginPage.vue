@@ -22,6 +22,7 @@ async function login() {
       password: password.value,
     })
     axios.defaults.headers.common.Authorization = `Bearer ${data.token}`
+    localStorage.setItem('token', data.token)
     userStore.setUser(data.user)
     router.push('/')
   } catch (e: any) {
