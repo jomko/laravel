@@ -22,7 +22,9 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         return response()->json([
-            'user' => $request->user(),
+
+            'user' => Auth::guard('web')->user(),
+
         ]);
     }
 
