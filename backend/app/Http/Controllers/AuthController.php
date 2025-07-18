@@ -15,22 +15,23 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (!Auth::attempt($credentials)) {
+        if (!Auth::guard('web')->attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        $user = Auth::user();
-        $token = $user->createToken('auth-token')->plainTextToken;
+        $request->session()->regenerate();
 
         return response()->json([
-            'token' => $token,
-            'user' => $user,
+            'user' => $request->user(),
         ]);
     }
 
     public function logout(Request $request): JsonResponse
     {
-        $request->user()->currentAccessToken()->delete();
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return response()->json(['message' => 'Logged out']);
     }

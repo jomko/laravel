@@ -9,9 +9,9 @@ Route::get('/ping', function () {
     return response()->json(['message' => 'pong']);
 });
 
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink']);
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/user', [AuthController::class, 'user']);
+Route::middleware('web')->group(function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+    Route::get('/user', [AuthController::class, 'user'])->middleware('auth');
 });
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink']);
