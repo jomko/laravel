@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
 
 const emit = defineEmits<{
-  (e: 'switch', mode: 'login' | 'register'): void
+  (e: 'switch', mode: 'login' | 'register' | 'forgot'): void
 }>()
 
 const email = ref('')
@@ -39,6 +39,9 @@ const login = async () => {
         <Input v-model="password" placeholder="••••••••" type="password" />
       </CardContent>
       <CardFooter class="flex flex-col space-y-4">
+        <div class="w-full text-right">
+          <button type="button" class="text-xs text-muted-foreground hover:underline" @click="emit('switch', 'forgot')">Forgot your password?</button>
+        </div>
         <Button type="submit" class="w-full">Log in</Button>
         <p class="text-sm text-center text-muted-foreground">
           Don’t have an account?
