@@ -5,7 +5,9 @@ import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import ForgotPasswordForm from '@/components/ForgotPasswordForm.vue'
 
+const mode = ref<'login' | 'forgot'>('login')
 const email = ref('')
 const password = ref('')
 const error = ref<string | null>(null)
@@ -31,10 +33,14 @@ async function login() {
 <template>
   <div class="min-h-screen flex flex-col items-center justify-center space-y-8">
     <img src="/logo.png" alt="Logo" class="h-16" />
-    <form @submit.prevent="login" class="w-full max-w-sm space-y-4">
+    <ForgotPasswordForm v-if="mode === 'forgot'" @switch="mode = $event" />
+    <form v-else @submit.prevent="login" class="w-full max-w-sm space-y-4">
       <Input v-model="email" type="email" placeholder="Email" />
       <Input v-model="password" type="password" placeholder="Password" />
       <p v-if="error" class="text-red-500 text-sm">{{ error }}</p>
+      <div class="text-right">
+        <button type="button" class="text-xs underline" @click="mode = 'forgot'">Forgot password?</button>
+      </div>
       <Button type="submit" class="w-full">Log in</Button>
     </form>
   </div>

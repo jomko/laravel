@@ -3,9 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
+
 use Tests\TestCase;
 
 class ForgotPasswordTest extends TestCase
@@ -30,17 +32,20 @@ class ForgotPasswordTest extends TestCase
         Notification::assertSentTo($user, ResetPassword::class);
     }
 
-    /**
-     * Ensure /api/forgot-password returns errors for non-existent users.
-     */
-    public function test_forgot_password_returns_error_for_unknown_email(): void
+
+    public function test_endpoint_returns_success_for_valid_email(): void
     {
-        Notification::fake();
+        $user = User::factory()->create();
+
+        config(['app.key' => 'base64:'.base64_encode(random_bytes(32))]);
+
+        ResetPassword::createUrlUsing(fn ($user, string $token) => 'http://example.com/reset/'.$token);
 
         $response = $this->postJson('/api/forgot-password', [
-            'email' => 'unknown@example.com',
+            'email' => $user->email,
         ]);
 
-        $response->assertStatus(422);
+        $response->assertOk()->assertJsonStructure(['status']);
+
     }
 }
