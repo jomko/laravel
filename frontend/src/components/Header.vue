@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+
 import { useUserStore } from '@/stores/user'
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -8,9 +10,17 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu'
 
+
 const userStore = useUserStore()
 function logout() {
+
+const router = useRouter()
+const userStore = useUserStore()
+
+function logout() {
   userStore.logout()
+  router.push('/login')
+
 }
 </script>
 
