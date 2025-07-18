@@ -4,6 +4,10 @@ import { useUserStore } from '@/stores/user'
 const routes = [
     {
         path: '/',
+        redirect: '/dashboard',
+    },
+    {
+        path: '/dashboard',
         component: () => import('@/components/HelloWorldPage.vue'),
         meta: { requiresAuth: true },
     },
