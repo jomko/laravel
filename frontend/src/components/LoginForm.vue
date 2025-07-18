@@ -12,9 +12,11 @@ const emit = defineEmits<{
 
 const email = ref('')
 const password = ref('')
+const error = ref<string | null>(null)
 const userStore = useUserStore()
 
 const login = async () => {
+  error.value = null
   try {
     const { data } = await axios.post('/api/login', {
       email: email.value,
@@ -22,8 +24,8 @@ const login = async () => {
     })
     axios.defaults.headers.common.Authorization = `Bearer ${data.token}`
     userStore.setUser(data.user)
-  } catch (e) {
-    alert('Invalid credentials')
+  } catch (e: any) {
+    error.value = e.response?.data?.message || 'Invalid credentials'
   }
 }
 </script>
@@ -37,6 +39,7 @@ const login = async () => {
       <CardContent class="space-y-4">
         <Input v-model="email" placeholder="you@example.com" type="email" />
         <Input v-model="password" placeholder="••••••••" type="password" />
+        <p v-if="error" class="text-sm text-red-500">{{ error }}</p>
       </CardContent>
       <CardFooter class="flex flex-col space-y-4">
         <div class="w-full text-right">
