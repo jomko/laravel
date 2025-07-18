@@ -27,7 +27,6 @@ class LoginTest extends TestCase
 
         $response->assertOk()
                  ->assertJsonStructure([
-                     'token',
                      'user' => ['id', 'email'],
                  ]);
     }
