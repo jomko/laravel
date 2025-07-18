@@ -1,5 +1,5 @@
 <script setup lang="ts">
-<<<<<<< HEAD  import DemoPage from './components/DemoPage.vue'
+  import DemoPage from './components/DemoPage.vue'
   import Login from './pages/Login.vue'
   import { useUserStore } from '@/stores/user'
   import { useAuth } from '@/composables/useAuth'

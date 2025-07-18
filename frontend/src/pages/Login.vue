@@ -4,9 +4,6 @@
       <form @submit.prevent="login" class="space-y-6">
         <CardHeader class="space-y-2 text-center">
           <CardTitle>Welcome back</CardTitle>
-          <CardDescription>
-            Enter your email and password to log in to your account
-          </CardDescription>
         </CardHeader>
         <CardContent class="space-y-4">
           <Button variant="outline" class="w-full" @click="googleLogin">
