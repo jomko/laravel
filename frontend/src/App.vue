@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { useAuth } from '@/composables/useAuth'
+import Header from '@/components/Header.vue'
 
 useAuth()
-
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen py-2">
-    <img src="/logo.png" alt="" />
-    <router-view />
+  <div class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1 p-4">
+      <router-view />
+    </main>
   </div>
 </template>
