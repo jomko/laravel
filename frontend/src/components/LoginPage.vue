@@ -25,7 +25,7 @@ async function login() {
     axios.defaults.headers.common.Authorization = `Bearer ${data.token}`
     localStorage.setItem('token', data.token)
     userStore.setUser(data.user)
-    router.push('/')
+    router.push('/dashboard')
   } catch (e: any) {
     error.value = e.response?.data?.message || 'Invalid credentials'
   }
