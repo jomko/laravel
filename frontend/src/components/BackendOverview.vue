@@ -53,7 +53,7 @@
     <div>
       <h2 class="text-xl font-semibold mb-3">🔐 Security</h2>
       <ul class="list-disc list-inside space-y-1">
-        <li><b>Laravel Sanctum:</b> token-based auth</li>
+        <li><b>Laravel Sanctum:</b> session (cookie)-based auth</li>
         <li><b>Role-based access:</b> admin / staff / etc.</li>
         <li><b>Middleware filters:</b> access control</li>
         <li><b>Rate limiting + audit:</b> protection and logging</li>
