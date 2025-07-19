@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/vue-query'
 import { watchEffect } from 'vue'
 import axios from 'axios'
-import { useUserStore } from '@/stores/user'
+import { useUserStore, type User } from '@/stores/user'
 
 export function useAuth() {
   const userStore = useUserStore()
 
-  const query = useQuery<{ id: number; name: string; email: string }>({
+  const query = useQuery<{ user: User }>({
     queryKey: ['user'],
     queryFn: async () => {
       const { data } = await axios.get('/api/user')
@@ -17,7 +17,7 @@ export function useAuth() {
 
   watchEffect(() => {
     if (query.data.value) {
-      userStore.setUser(query.data.value)
+      userStore.setUser(query.data.value.user)
     }
     if (query.error.value) {
       userStore.logout()
