@@ -17,13 +17,12 @@ const userStore = useUserStore()
 
 const register = async () => {
   try {
+    await axios.get('/sanctum/csrf-cookie')
     const { data } = await axios.post('/api/register', {
       name: name.value,
       email: email.value,
       password: password.value,
     })
-    axios.defaults.headers.common.Authorization = `Bearer ${data.token}`
-    localStorage.setItem('token', data.token)
     userStore.setUser(data.user)
   } catch (e) {
     alert('Registration failed')
@@ -33,7 +32,7 @@ const register = async () => {
 
 <template>
   <Card class="mx-auto w-full max-w-md">
-    <form @submit.prevent="register" class="space-y-6">
+    <form class="space-y-6" @submit.prevent="register">
       <CardHeader class="space-y-2 text-center">
         <CardTitle>Create an account</CardTitle>
       </CardHeader>

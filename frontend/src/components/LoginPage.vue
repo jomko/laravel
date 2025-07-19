@@ -26,12 +26,11 @@ watch(
 async function login() {
   error.value = null
   try {
+    await axios.get('/sanctum/csrf-cookie')
     const { data } = await axios.post('/api/login', {
       email: email.value,
       password: password.value,
     })
-    axios.defaults.headers.common.Authorization = `Bearer ${data.token}`
-    localStorage.setItem('token', data.token)
     userStore.setUser(data.user)
     router.push('/dashboard')
   } catch (e: any) {
