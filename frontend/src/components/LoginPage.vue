@@ -26,6 +26,7 @@ watch(
 async function login() {
   error.value = null
   try {
+    await axios.get('/sanctum/csrf-cookie')
     const { data } = await axios.post('/api/login', {
       email: email.value,
       password: password.value,

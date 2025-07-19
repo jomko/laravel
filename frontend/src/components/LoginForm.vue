@@ -18,6 +18,7 @@ const userStore = useUserStore()
 const login = async () => {
   error.value = null
   try {
+    await axios.get('/sanctum/csrf-cookie')
     const { data } = await axios.post('/api/login', {
       email: email.value,
       password: password.value,
@@ -32,7 +33,7 @@ const login = async () => {
 
 <template>
   <Card class="mx-auto w-full max-w-md">
-    <form @submit.prevent="login" class="space-y-6">
+    <form class="space-y-6" @submit.prevent="login">
       <CardHeader class="space-y-2 text-center">
         <CardTitle>Welcome back</CardTitle>
       </CardHeader>
